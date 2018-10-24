@@ -11,10 +11,13 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'TopController@index');
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::resource('forums', 'Database\\ForumController');
+Route::resource('threads', 'Database\\ThreadController');
+Route::resource('comments', 'Database\\CommentController');
+Route::resource('replies', 'Database\\ReplyController');
