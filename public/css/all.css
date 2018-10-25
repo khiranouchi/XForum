@@ -1,0 +1,47 @@
+/*************************************************
+ ** page layout **********************************
+ *************************************************/
+
+.x-part {
+	margin-bottom: 1.5rem;
+}
+.x-part:last-child {
+	margin-bottom: 0;
+}
+
+
+/*************************************************
+ ** bootstrap card *******************************
+ *************************************************/
+
+.card-body {
+    padding: 1rem;
+}
+.card-body dl {
+    margin-bottom: 0;
+}
+.card-body dd {
+    margin-bottom: 0.25rem;
+}
+.card-body dd:last-child {
+    margin-bottom: 0;
+}
+
+
+/*************************************************
+ ** bootstrap list-group *************************
+ *************************************************/
+
+.list-group a {
+	padding-top: 0.5rem;
+	padding-bottom: 0.5rem;
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+}
+
+.list-group .x-font-large {
+	font-size: large;
+	font-weight: bold;
+	margin-top: -0.1rem;
+	margin-bottom: -0.1rem;
+}

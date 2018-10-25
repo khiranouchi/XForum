@@ -5,6 +5,15 @@ return [
      * Section titles
      */
     'sectitle_create_forum' => 'Create New Forum',
+    'sectitle_thread_list' => 'Threads',
+
+    /*
+     * Labels
+     */
+    'forum_title' => 'Title',
+    'forum_description' => 'Description',
+    'forum_creator_user_name' => 'Creator',
+    'forum_password' => 'Password',
 
     /*
      * Form labels

@@ -16,7 +16,7 @@ class ForumController extends Controller
      */
     public function index()
     {
-        //
+        abort(404);
     }
 
     /**
@@ -26,7 +26,7 @@ class ForumController extends Controller
      */
     public function create()
     {
-        //
+        abort(404);
     }
 
     /**
@@ -60,7 +60,13 @@ class ForumController extends Controller
      */
     public function show(Forum $forum)
     {
-        //
+
+
+
+        return view('forum', [
+            'forum' => $forum,
+
+        ]);
     }
 
     /**
