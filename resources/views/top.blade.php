@@ -15,7 +15,7 @@
                         <div class="form-group row">
                             <label for="title" class="col-md-4 col-form-label text-md-right">{{ __('labels.form_forum_title') }}</label>
                             <div class="col-md-6">
-                                <input type="text" id="title" class="form-control" value="{{ old('title') }}" required autofocus>
+                                <input type="text" name="title" id="title" class="form-control" value="{{ old('title') }}" required autofocus>
                             </div>
                         </div>
 
@@ -23,14 +23,14 @@
                         <div class="form-group row">
                             <label for="description" class="col-md-4 col-form-label text-md-right">{{ __('labels.form_forum_description') }}</label>
                             <div class="col-md-6">
-                                <input type="text" id="description" class="form-control" value="{{ old('description') }}" autofocus>
+                                <input type="text" name="description" id="description" class="form-control" value="{{ old('description') }}" autofocus>
                             </div>
                         </div>
 
                         @if ($user)
                         <!-- password -->
                         <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('labels.form_forum_password') }}</label>
+                            <label for="password" name="password" class="col-md-4 col-form-label text-md-right">{{ __('labels.form_forum_password') }}</label>
                             <div class="col-md-6">
                                 <input type="password" id="password" class="form-control" value="{{ old('password') }}" autofocus>
                             </div>

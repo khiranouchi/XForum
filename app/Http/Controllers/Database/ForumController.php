@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Database;
 use App\Http\Controllers\Controller;
 use App\Models\Forum;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class ForumController extends Controller
 {
@@ -36,7 +37,19 @@ class ForumController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $forum = new Forum;
+
+        $forum->title = $request->title;
+        $forum->description = $request->description;
+        $forum->password = Hash::make($request->password);
+
+        if($request->user()) {
+            $forum->creator_user_id = $request->user()->id;
+        }
+
+        $forum->save();
+
+        return redirect()->route('forums.show', ['id' => $forum]);
     }
 
     /**
