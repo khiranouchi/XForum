@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('head')
+<script src="{{ asset('js/jquery.autosize.js') }}"></script>
+@endsection
+
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
@@ -23,7 +27,7 @@
                         <div class="form-group row">
                             <label for="description" class="col-md-4 col-form-label text-md-right">{{ __('labels.form_forum_description') }}</label>
                             <div class="col-md-6">
-                                <input type="text" name="description" id="description" class="form-control" value="{{ old('description') }}" autofocus>
+                                <textarea name="description" id="description" class="form-control" value="{{ old('description') }}" autofocus></textarea>
                             </div>
                         </div>
 
@@ -50,4 +54,12 @@
         </div>
     </div>
 </div>
+
+<script>
+$(document).ready(function(){
+    // activate autosize
+    autosize($('textarea'));
+});
+</script>
+
 @endsection
