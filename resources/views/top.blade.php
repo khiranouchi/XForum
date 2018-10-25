@@ -34,9 +34,9 @@
                         @if ($user)
                         <!-- password -->
                         <div class="form-group row">
-                            <label for="password" name="password" class="col-md-4 col-form-label text-md-right">{{ __('labels.form_forum_password') }}</label>
+                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('labels.form_forum_password') }}</label>
                             <div class="col-md-6">
-                                <input type="password" id="password" class="form-control" value="{{ old('password') }}" autofocus>
+                                <input type="password" name="password" id="password" class="form-control" value="{{ old('password') }}" autofocus>
                             </div>
                         </div>
                         @endif

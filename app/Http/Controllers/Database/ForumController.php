@@ -41,8 +41,9 @@ class ForumController extends Controller
 
         $forum->title = $request->title;
         $forum->description = $request->description;
-        $forum->password = Hash::make($request->password);
-
+        if($request->filled('password')) {
+            $forum->password = Hash::make($request->password);
+        }
         if($request->user()) {
             $forum->creator_user_id = $request->user()->id;
         }
