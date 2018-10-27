@@ -31,4 +31,9 @@ return [
      */
     'btn_create_forum' => 'Create',
     'btn_create_thread' => 'Create',
+
+    /*
+     * Others
+     */
+    'text_no_description' => '(no description)',
 ];

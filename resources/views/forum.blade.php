@@ -93,24 +93,27 @@
         <div class="col-md-8">
             <h5>{{ __('labels.sectitle_thread_list') }}</h5>
 
+            @foreach ($threads as $thread)
             <div class="list-group">
                 <a href="#" class="list-group-item list-group-item-action">
                     <div class="d-flex w-100 justify-content-between">
-                        <div class="x-font-large">Thread1</div>
-                        <div>Created by username1</div>
+                        <div class="x-font-large">{{ $thread->title }}</div>
+
+                        @if ($thread->creator_user)
+                        <div>Created by {{ $thread->creator_user->name }}</div>
+                        @elseif (!is_null($thread->creator_name) and $thread->creator_name !== "")
+                        <div>Created by {{ $thread->creator_name }}</div>
+                        @endif
                     </div>
-                    <div>description description description description description</div>
+
+                    @if (is_null($thread->description) or $thread->description === "")
+                    <div>{{ __('labels.text_no_description') }}</div>
+                    @else
+                    <div>{{ $thread->description }}</div>
+                    @endif
                 </a>
             </div>
-            <div class="list-group">
-                <a href="#" class="list-group-item list-group-item-action">
-                    <div class="d-flex w-100 justify-content-between">
-                        <div class="x-font-large">Thread2</div>
-                        <div></div>
-                    </div>
-                    <div>description description description description description description ...</div>
-                </a>
-            </div>
+            @endforeach
         </div>
     </div>
 </div>

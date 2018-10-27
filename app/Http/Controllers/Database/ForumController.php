@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Database;
 
 use App\Http\Controllers\Controller;
 use App\Models\Forum;
+use App\Models\Thread;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -65,10 +66,13 @@ class ForumController extends Controller
         // put forum_id in session
         session(['forum_id' => $forum->id]);
 
-
+        // get lines of Thread (ordered by updated_at)
+        $ln_threads = Thread::where('forum_id', $forum->id)->orderBy('updated_at', 'desc');
+        $threads = $ln_threads->get();
 
         return view('forum', [
             'forum' => $forum,
+            'threads' => $threads,
             'user' => $request->user()
         ]);
     }
