@@ -6,6 +6,7 @@ return [
      */
     'sectitle_create_forum' => 'Create New Forum',
     'sectitle_create_thread' => 'Create New Thread',
+    'sectitle_forum_login' => 'Enter the password',
     'sectitle_thread_list' => 'Threads',
 
     /*
@@ -22,6 +23,7 @@ return [
     'form_forum_title' => 'Name',
     'form_forum_description' => 'Description (optional)',
     'form_forum_password' => 'Password (optional)',
+    'form_forum_login_password' => 'Password',
     'form_thread_title' => 'Name',
     'form_thread_description' => 'Description (optional)',
     'form_thread_creator_name' => 'Creator Name (optional)',
@@ -30,6 +32,7 @@ return [
      * Button labels
      */
     'btn_create_forum' => 'Create',
+    'btn_login_forum' => 'OK',
     'btn_create_thread' => 'Create',
 
     /*
