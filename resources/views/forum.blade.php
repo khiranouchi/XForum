@@ -96,20 +96,22 @@
             @foreach ($threads as $thread)
             <div class="list-group">
                 <a href="#" class="list-group-item list-group-item-action">
-                    <div class="d-flex w-100 justify-content-between">
-                        <div class="x-font-large">{{ $thread->title }}</div>
+                    <div class="row">
+                        <div class="col-sm-7 x-font-large x-text-ellipsis">{{ $thread->title }}</div>
 
-                        @if ($thread->creator_user)
-                        <div>Created by {{ $thread->creator_user->name }}</div>
-                        @elseif (!is_null($thread->creator_name) and $thread->creator_name !== "")
-                        <div>Created by {{ $thread->creator_name }}</div>
-                        @endif
+                        <div class="col-sm-5 text-sm-right x-text-ellipsis">
+                            @if ($thread->creator_user)
+                            Created by {{ $thread->creator_user->name }}
+                            @elseif (!is_null($thread->creator_name) and $thread->creator_name !== "")
+                            Created by {{ $thread->creator_name }}
+                            @endif
+                        </div>
                     </div>
 
                     @if (is_null($thread->description) or $thread->description === "")
                     <div>{{ __('labels.text_no_description') }}</div>
                     @else
-                    <div>{{ $thread->description }}</div>
+                    <div class="x-text-ellipsis">{{ $thread->description }}</div>
                     @endif
                 </a>
             </div>

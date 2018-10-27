@@ -45,3 +45,14 @@
 	margin-top: -0.1rem;
 	margin-bottom: -0.1rem;
 }
+
+
+/*************************************************
+ ** others ***************************************
+ *************************************************/
+
+.x-text-ellipsis {
+    overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
