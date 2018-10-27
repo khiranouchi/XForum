@@ -41,9 +41,15 @@
     <div class="x-part row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('labels.sectitle_create_thread') }}</div>
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col-10">{{ __('labels.sectitle_create_thread') }}</div>
+                        <div class="col-2 text-right x-hover-pointer"
+                             onclick="ShowHideBlock(this, 'z_create_thread_form_body')">&#x25bc;</div>
+                    </div>
+                </div>
 
-                <div class="card-body">
+                <div class="card-body" id="z_create_thread_form_body" style="display: none">
                     <form method="POST" action="{{ route('threads.store') }}">
                         @csrf
 
