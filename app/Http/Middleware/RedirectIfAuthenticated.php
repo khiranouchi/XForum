@@ -18,7 +18,11 @@ class RedirectIfAuthenticated
     public function handle($request, Closure $next, $guard = null)
     {
         if (Auth::guard($guard)->check()) {
-            return redirect('/home');
+            if ($guard === 'forum') {
+                // redirect process is written in the controller.
+            } else {
+                return redirect('/home');
+            }
         }
 
         return $next($request);

@@ -18,6 +18,9 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('forums', 'Database\\ForumController');
+Route::get('/forums/{forum}/login', 'Database\\ForumController@showLoginForm')->name('forums.showLoginForm');
+Route::post('/forums/login', 'Database\\ForumController@authenticate')->name('forums.authenticate');
+
 Route::resource('threads', 'Database\\ThreadController');
 Route::resource('comments', 'Database\\CommentController');
 Route::resource('replies', 'Database\\ReplyController');

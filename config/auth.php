@@ -45,6 +45,10 @@ return [
             'driver' => 'token',
             'provider' => 'users',
         ],
+        'forum' => [
+            'driver' => 'session',
+            'provider' => 'forums',
+        ],
     ],
 
     /*
@@ -68,6 +72,10 @@ return [
         'users' => [
             'driver' => 'eloquent',
             'model' => App\User::class,
+        ],
+        'forums' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Forum::class,
         ],
 
         // 'users' => [
