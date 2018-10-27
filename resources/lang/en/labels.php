@@ -5,12 +5,13 @@ return [
      * Section titles
      */
     'sectitle_create_forum' => 'Create New Forum',
+    'sectitle_create_thread' => 'Create New Thread',
     'sectitle_thread_list' => 'Threads',
 
     /*
      * Labels
      */
-    'forum_title' => 'Title',
+    'forum_title' => 'Name',
     'forum_description' => 'Description',
     'forum_creator_user_name' => 'Creator',
     'forum_password' => 'Password',
@@ -21,9 +22,13 @@ return [
     'form_forum_title' => 'Name',
     'form_forum_description' => 'Description (optional)',
     'form_forum_password' => 'Password (optional)',
+    'form_thread_title' => 'Name',
+    'form_thread_description' => 'Description (optional)',
+    'form_thread_creator_name' => 'Creator Name (optional)',
 
     /*
      * Button labels
      */
     'btn_create_forum' => 'Create',
+    'btn_create_thread' => 'Create',
 ];
