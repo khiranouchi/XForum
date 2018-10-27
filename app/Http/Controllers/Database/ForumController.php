@@ -62,6 +62,8 @@ class ForumController extends Controller
      */
     public function show(Request $request, Forum $forum)
     {
+        // put forum_id in session
+        session(['forum_id' => $forum->id]);
 
 
 

@@ -36,7 +36,25 @@ class ThreadController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $thread = new Thread;
+
+        // verify forum_id with one in session
+        if ($request->forum_id !== session('forum_id')) {
+            return abort(419);
+        }
+        $thread->forum_id = $request->forum_id;
+
+        $thread->title = $request->title;
+        $thread->description = $request->description;
+        if($request->user()) {
+            $thread->creator_user_id = $request->user()->id;
+        } else {
+            $thread->creator_name = $request->creator_name;
+        }
+
+        $thread->save();
+
+        // TODO
     }
 
     /**
