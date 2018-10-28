@@ -13,6 +13,7 @@ class ThreadController extends Controller
     public function __construct()
     {
         $this->middleware('auth.forum');
+        $this->middleware('verify.forum');
     }
 
     /**
@@ -20,7 +21,7 @@ class ThreadController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Forum $forum)
     {
         //
     }
@@ -30,7 +31,7 @@ class ThreadController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Forum $forum)
     {
         //
     }
@@ -72,11 +73,6 @@ class ThreadController extends Controller
      */
     public function show(Forum $forum, Thread $thread)
     {
-        // verify the specified thread is in the specified forum
-        if ($thread->forum_id !== $forum->id) {
-            abort(404);
-        }
-
         // put forum_id in session
         session(['forum_id' => $forum->id]);
 
@@ -100,7 +96,7 @@ class ThreadController extends Controller
      * @param  \App\Models\Thread  $thread
      * @return \Illuminate\Http\Response
      */
-    public function edit(Thread $thread)
+    public function edit(Forum $forum, Thread $thread)
     {
         //
     }
@@ -114,7 +110,7 @@ class ThreadController extends Controller
      */
     public function update(Request $request, Forum $forum, Thread $thread)
     {
-        //
+        // TODO
     }
 
     /**
@@ -125,6 +121,6 @@ class ThreadController extends Controller
      */
     public function destroy(Forum $forum, Thread $thread)
     {
-        //
+        // TODO
     }
 }

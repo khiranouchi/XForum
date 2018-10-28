@@ -30,5 +30,12 @@ Route::get('/forums/{forum}/threads/{thread}', 'Database\\ThreadController@show'
 Route::patch('/forums/{forum}/threads/{thread}', 'Database\\ThreadController@update')->name('threads.update');
 Route::delete('/forums/{forum}/threads/{thread}', 'Database\\ThreadController@destroy')->name('threads.destroy');
 
-Route::resource('comments', 'Database\\CommentController');
-Route::resource('replies', 'Database\\ReplyController');
+// resource Comment
+Route::post('/forums/{forum}/threads/{thread}/comments', 'Database\\CommentController@store')->name('comments.store');
+Route::patch('/forums/{forum}/threads/{thread}/comments/{comment}', 'Database\\CommentController@update')->name('comments.update');
+Route::delete('/forums/{forum}/threads/{thread}/comments/{comment}', 'Database\\CommentController@destroy')->name('comments.destroy');
+
+// resource Reply
+Route::post('/forums/{forum}/threads/{thread}/comments/{comment}/replies', 'Database\\ReplyController@store')->name('replies.store');
+Route::patch('/forums/{forum}/threads/{thread}/comments/{comment}/replies/{reply}', 'Database\\ReplyController@update')->name('replies.update');
+Route::delete('/forums/{forum}/threads/{thread}/comments/{comment}/replies/{reply}', 'Database\\ReplyController@destroy')->name('replies.destroy');

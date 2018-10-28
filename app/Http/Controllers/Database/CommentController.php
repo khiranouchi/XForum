@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Database;
 
 use App\Http\Controllers\Controller;
 use App\Models\Comment;
+use App\Models\Forum;
+use App\Models\Thread;
 use Illuminate\Http\Request;
 
 class CommentController extends Controller
@@ -11,6 +13,7 @@ class CommentController extends Controller
     public function __construct()
     {
         $this->middleware('auth.forum');
+        $this->middleware('verify.forum');
     }
 
     /**
@@ -18,7 +21,7 @@ class CommentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Forum $forum, Thread $thread)
     {
         //
     }
@@ -28,7 +31,7 @@ class CommentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Forum $forum, Thread $thread)
     {
         //
     }
@@ -39,9 +42,9 @@ class CommentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Forum $forum, Thread $thread)
     {
-        //
+        // TODO
     }
 
     /**
@@ -61,7 +64,7 @@ class CommentController extends Controller
      * @param  \App\Models\Comment  $comment
      * @return \Illuminate\Http\Response
      */
-    public function edit(Comment $comment)
+    public function edit(Forum $forum, Thread $thread, Comment $comment)
     {
         //
     }
@@ -73,9 +76,9 @@ class CommentController extends Controller
      * @param  \App\Models\Comment  $comment
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Comment $comment)
+    public function update(Request $request, Forum $forum, Thread $thread, Comment $comment)
     {
-        //
+        // TODO
     }
 
     /**
@@ -84,8 +87,8 @@ class CommentController extends Controller
      * @param  \App\Models\Comment  $comment
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Comment $comment)
+    public function destroy(Forum $forum, Thread $thread, Comment $comment)
     {
-        //
+        // TODO
     }
 }

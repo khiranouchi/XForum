@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\Database;
 
 use App\Http\Controllers\Controller;
+use App\Models\Comment;
+use App\Models\Forum;
 use App\Models\Reply;
+use App\Models\Thread;
 use Illuminate\Http\Request;
 
 class ReplyController extends Controller
@@ -11,6 +14,7 @@ class ReplyController extends Controller
     public function __construct()
     {
         $this->middleware('auth.forum');
+        $this->middleware('verify.forum');
     }
 
     /**
@@ -18,7 +22,7 @@ class ReplyController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Forum $forum, Thread $thread, Comment $comment)
     {
         //
     }
@@ -28,7 +32,7 @@ class ReplyController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Forum $forum, Thread $thread, Comment $comment)
     {
         //
     }
@@ -39,9 +43,9 @@ class ReplyController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Forum $forum, Thread $thread, Comment $comment)
     {
-        //
+        // TODO
     }
 
     /**
@@ -50,7 +54,7 @@ class ReplyController extends Controller
      * @param  \App\Models\Reply  $reply
      * @return \Illuminate\Http\Response
      */
-    public function show(Reply $reply)
+    public function show(Forum $forum, Thread $thread, Comment $comment, Reply $reply)
     {
         //
     }
@@ -61,7 +65,7 @@ class ReplyController extends Controller
      * @param  \App\Models\Reply  $reply
      * @return \Illuminate\Http\Response
      */
-    public function edit(Reply $reply)
+    public function edit(Forum $forum, Thread $thread, Comment $comment, Reply $reply)
     {
         //
     }
@@ -73,9 +77,9 @@ class ReplyController extends Controller
      * @param  \App\Models\Reply  $reply
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Reply $reply)
+    public function update(Request $request, Forum $forum, Thread $thread, Comment $comment, Reply $reply)
     {
-        //
+        // TODO
     }
 
     /**
@@ -84,8 +88,8 @@ class ReplyController extends Controller
      * @param  \App\Models\Reply  $reply
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Reply $reply)
+    public function destroy(Forum $forum, Thread $thread, Comment $comment, Reply $reply)
     {
-        //
+        // TODO
     }
 }
