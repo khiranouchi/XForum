@@ -66,7 +66,13 @@ class ThreadController extends Controller
      */
     public function show(Forum $forum, Thread $thread)
     {
-        //
+        // password check
+
+
+        // put forum_id in session
+
+
+
     }
 
     /**

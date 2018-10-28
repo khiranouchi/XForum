@@ -5,55 +5,14 @@ namespace App\Http\Controllers\Database;
 use App\Http\Controllers\Controller;
 use App\Models\Forum;
 use App\Models\Thread;
-use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class ForumController extends Controller
 {
-    use AuthenticatesUsers;
-
     public function __construct()
     {
-        $this->middleware('guest:forum')->except('logout');
-    }
-
-    protected function guard()
-    {
-        return Auth::guard('forum');
-    }
-
-    /**
-     * Show the login form for the forum.
-     *
-     * @param Request $request
-     * @param Forum $forum
-     * @return \Illuminate\View\View|\Illuminate\Contracts\View\Factory
-     */
-    public function showLoginForm(Request $request, Forum $forum)
-    {
-        return view('forum_login', ['forum'=>$forum]);
-    }
-
-    /**
-     * Authentication.
-     *
-     * @param Request $request
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function authenticate(Request $request)
-    {
-        Auth::guard('forum');
-
-        $forum_id = $request->forum_id;
-        $password = $request->password;
-
-        if (Auth::guard('forum')->attempt(['id' => $forum_id, 'password' => $password])) {
-            return redirect()->route('forums.show', ['id' => $forum_id]);
-        } else {
-            return redirect()->route('forums.showLoginForm', ['id' => $forum_id]);
-        }
+        $this->middleware('auth.forum');
     }
 
     /**
@@ -109,19 +68,6 @@ class ForumController extends Controller
      */
     public function show(Request $request, Forum $forum)
     {
-        // password check
-        $authed = 0;
-        if($forum->password != NULL) {
-            if (Auth::guard('forum')->check()) {
-                if (Auth::guard('forum')->user()->id === $forum->id) {
-                    $authed = 1;
-                }
-            }
-            if($authed === 0){
-                return redirect()->route('forums.showLoginForm', ['id' => $forum]);
-            }
-        }
-
         // put forum_id in session
         session(['forum_id' => $forum->id]);
 

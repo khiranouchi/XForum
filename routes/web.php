@@ -17,10 +17,12 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+// auth to forums
+Route::get('/forums/{forum}/login', 'Auth\\ForumLoginController@showLoginForm')->name('forums.showLoginForm');
+Route::post('/forums/login', 'Auth\\ForumLoginController@authenticate')->name('forums.authenticate');
+
 // resource Forum
 Route::resource('forums', 'Database\\ForumController');
-Route::get('/forums/{forum}/login', 'Database\\ForumController@showLoginForm')->name('forums.showLoginForm');
-Route::post('/forums/login', 'Database\\ForumController@authenticate')->name('forums.authenticate');
 
 // resource Thread
 Route::post('/forums/{forum}/threads', 'Database\\ThreadController@store')->name('threads.store');
