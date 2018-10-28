@@ -3,12 +3,18 @@
 namespace App\Http\Controllers\Database;
 
 use App\Http\Controllers\Controller;
+use App\Models\Comment;
 use App\Models\Forum;
 use App\Models\Thread;
 use Illuminate\Http\Request;
 
 class ThreadController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth.forum');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -66,13 +72,26 @@ class ThreadController extends Controller
      */
     public function show(Forum $forum, Thread $thread)
     {
-        // password check
-
+        // verify the specified thread is in the specified forum
+        if ($thread->forum_id !== $forum->id) {
+            abort(404);
+        }
 
         // put forum_id in session
+        session(['forum_id' => $forum->id]);
+
+        // get lines of Comment (ordered by updated_at)
+        $ln_comments = Comment::where('thread_id', $thread->id)->orderBy('updated_at', 'desc');
+        $comments = $ln_comments->get();
 
 
 
+
+        return view('thread', [
+            'forum' => $forum,
+            'thread' => $thread,
+
+        ]);
     }
 
     /**

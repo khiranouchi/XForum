@@ -99,7 +99,8 @@
 
             @foreach ($threads as $thread)
             <div class="list-group">
-                <a href="#" class="list-group-item list-group-item-action">
+                <a href="{{ route('threads.show', ['forum' => $forum, 'thread' => $thread]) }}"
+                   class="list-group-item list-group-item-action">
                     <div class="row">
                         <div class="col-sm-7 x-font-large x-text-ellipsis">{{ $thread->title }}</div>
 

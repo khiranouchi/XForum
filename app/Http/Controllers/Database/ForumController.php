@@ -12,7 +12,7 @@ class ForumController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth.forum');
+        $this->middleware('auth.forum')->except('store');
     }
 
     /**

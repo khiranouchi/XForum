@@ -16,6 +16,9 @@ return [
     'forum_description' => 'Description',
     'forum_creator_user_name' => 'Creator',
     'forum_password' => 'Password',
+    'thread_title' => 'Name',
+    'thread_description' => 'Description',
+    'thread_creator_name' => 'Creator',
 
     /*
      * Form labels
