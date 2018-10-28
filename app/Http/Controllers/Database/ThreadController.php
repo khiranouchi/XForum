@@ -69,10 +69,11 @@ class ThreadController extends Controller
     /**
      * Display the specified resource.
      *
+     * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\Thread  $thread
      * @return \Illuminate\Http\Response
      */
-    public function show(Forum $forum, Thread $thread)
+    public function show(Request $request, Forum $forum, Thread $thread)
     {
         // put forum_id in session
         session(['forum_id' => $forum->id]);
@@ -92,7 +93,8 @@ class ThreadController extends Controller
             'forum' => $forum,
             'thread' => $thread,
             'comments' => $comments,
-            'dict_replies' => $dict_replies
+            'dict_replies' => $dict_replies,
+            'user' => $request->user()
         ]);
     }
 

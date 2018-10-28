@@ -6,6 +6,8 @@ return [
      */
     'sectitle_create_forum' => 'Create New Forum',
     'sectitle_create_thread' => 'Create New Thread',
+    'sectitle_create_comment' => 'Post new comment',
+    'sectitle_create_reply' => 'Post new reply',
     'sectitle_forum_login' => 'Enter the password',
     'sectitle_thread_list' => 'Threads',
     'sectitle_comment_list' => 'Comments',
@@ -31,6 +33,9 @@ return [
     'form_thread_title' => 'Name',
     'form_thread_description' => 'Description (optional)',
     'form_thread_creator_name' => 'Creator Name (optional)',
+    'form_comment_title' => 'Title (optional)',
+    'form_comment_creator_name' => 'Your name (optional)',
+    'form_reply_creator_name' => 'Your name (optional)',
 
     /*
      * Button labels
@@ -38,6 +43,8 @@ return [
     'btn_create_forum' => 'Create',
     'btn_login_forum' => 'OK',
     'btn_create_thread' => 'Create',
+    'btn_create_comment' => 'Post',
+    'btn_create_reply' => 'Post',
 
     /*
      * Others

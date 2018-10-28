@@ -40,13 +40,12 @@
         </div>
     </div>
 
-
-
     <!-- Comment list -->
     <div class="x-part row justify-content-center">
         <div class="col-md-8">
             <h5>{{ __('labels.sectitle_comment_list') }}</h5>
 
+            <!-- comments -->
             @foreach ($comments as $comment)
             <div class="x-subpart">
                 <div class="card">
@@ -92,6 +91,7 @@
                     </div>
                 </div>
 
+                <!-- replies -->
                 @foreach ($dict_replies[$comment->id] as $reply)
                 <div class="row">
                     <div class="col-11 offset-1">
@@ -128,8 +128,91 @@
                     </div>
                 </div>
                 @endforeach
+
+                <!-- Create new reply -->
+                <div class="row">
+                    <div class="col-11 offset-1">
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="row">
+                                    <div class="col-10">{{ __('labels.sectitle_create_reply') }}</div>
+                                    <div class="col-2 text-right x-hover-pointer"
+                                         onclick="ShowHideBlock(this, 'z_create_reply_{{ $comment->id }}_form_body')">&#x25bc;</div>
+                                </div>
+                            </div>
+
+                            <div class="card-body" id="z_create_reply_{{ $comment->id }}_form_body" style="display: none">
+                                <form method="POST" action="{{ route('replies.store', ['forum' => $forum->id, 'thread' => $thread->id, 'comment' => $comment->id]) }}">
+                                    @csrf
+
+                                    <div class="form-group">
+                                        <textarea name="content" id="content" class="form-control" value="{{ old('content') }}" required autofocus></textarea>
+                                    </div>
+
+                                    @if (!$user)
+                                    <div class="form-group row">
+                                        <div class="col-sm-7">
+                                            <input type="text" name="creator_name" id="creator_name" class="form-control"
+                                                   placeholder="{{ __('labels.form_reply_creator_name') }}" value="{{ old('creator_name') }}" autofocus>
+                                        </div>
+                                    </div>
+                                    @endif
+
+                                    <div class="form-group">
+                                        <button type="submit" class="btn btn-primary">
+                                            {{ __('labels.btn_create_reply') }}
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
             @endforeach
+
+            <!-- Create new comment -->
+            <div class="x-subpart">
+                <div class="card">
+                    <div class="card-header">
+	                    <div class="row">
+                            <div class="col-10">{{ __('labels.sectitle_create_comment') }}</div>
+                            <div class="col-2 text-right x-hover-pointer"
+                                 onclick="ShowHideBlock(this, 'z_create_comment_form_body')">&#x25bc;</div>
+                        </div>
+                    </div>
+
+                    <div class="card-body" id="z_create_comment_form_body" style="display: none">
+                        <form method="POST" action="{{ route('comments.store', ['forum' => $forum->id, 'thread' => $thread->id]) }}">
+                            @csrf
+
+                            <div class="form-group">
+                                <input type="text" name="title" id="title" class="form-control"
+                                       placeholder="{{ __('labels.form_comment_title') }}" value="{{ old('title') }}" autofocus>
+                            </div>
+
+                            <div class="form-group">
+                                <textarea name="content" id="content" class="form-control" value="{{ old('content') }}" required autofocus></textarea>
+                            </div>
+
+                            @if (!$user)
+                            <div class="form-group row">
+                                <div class="col-sm-6">
+                                    <input type="text" name="creator_name" id="creator_name" class="form-control"
+                                           placeholder="{{ __('labels.form_comment_creator_name') }}" value="{{ old('creator_name') }}" autofocus>
+                                </div>
+                            </div>
+                            @endif
+
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary">
+                                    {{ __('labels.btn_create_comment') }}
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

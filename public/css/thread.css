@@ -21,3 +21,15 @@
 	padding-top: 0.1rem;
 	font-size: small;
 }
+
+
+/*************************************************
+ ** bootstrap form (override) ********************
+ *************************************************/
+
+.form-group {
+	margin-bottom: 0.5rem;
+}
+.form-group:last-child {
+	margin-bottom: 0;
+}
