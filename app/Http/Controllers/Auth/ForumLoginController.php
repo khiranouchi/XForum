@@ -43,7 +43,7 @@ class ForumLoginController extends Controller
         $password = $request->password;
         
         if (Auth::guard('forum')->attempt(['id' => $forum_id, 'password' => $password])) {
-            return redirect()->route('forums.show', ['id' => $forum_id]);
+            return redirect(session('redirect_to'));
         } else {
             return redirect()->route('forums.showLoginForm', ['id' => $forum_id]);
         }
