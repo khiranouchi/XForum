@@ -48,52 +48,89 @@
             <h5>{{ __('labels.sectitle_comment_list') }}</h5>
 
             @foreach ($comments as $comment)
-            <div class="x-subpart card">
-                <div class="card-header">
-                    <div class="row">
-                        <div class="col-sm-11 x-text-ellipsis">
-                            @if (is_null($comment->title) or $comment->title === "")
-                            {{ __('labels.text_no_title') }}
-                            @else
-                            {{ $comment->title }}
-                            @endif
+            <div class="x-subpart">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="row">
+                            <div class="col-12 x-text-ellipsis">
+                                @if (is_null($comment->title) or $comment->title === "")
+                                {{ __('labels.text_no_title') }}
+                                @else
+                                {{ $comment->title }}
+                                @endif
+                            </div>
                         </div>
+                    </div>
 
-                        <div class="col-sm-1">
+                    <div class="card-body">
+                        {!! nl2br(e($comment->content)) !!}
+                    </div>
 
-                            <!-- TODO menu -->
+                    <div class="card-footer">
+                        <div class="row">
+                            <div class="col-7 x-text-ellipsis">
+                                {{ $comment->getCreatedAtDate() }}
+                                @if ($comment->created_at != $comment->updated_at)
+                                {{ __('labels.text_edited') }}
+                                @endif
+                            </div>
 
+                            <div class="col-4 text-right x-text-ellipsis">
+                                @if ($comment->creator_user)
+                                {{ $comment->creator_user->name }}
+                                @elseif (!is_null($comment->creator_name) and $comment->creator_name !== "")
+                                {{ $comment->creator_name }}
+                                @endif
+                            </div>
+
+                            <div class="col-1">
+
+                                <!-- TODO menu -->
+
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="card-body">
-                    {!! nl2br(e($comment->content)) !!}
-                </div>
+                @foreach ($dict_replies[$comment->id] as $reply)
+                <div class="row">
+                    <div class="col-11 offset-1">
+                        <div class="card">
+                            <div class="card-body">
+                                {!! nl2br(e($reply->content)) !!}
+                            </div>
 
-                <div class="card-footer">
-                    <div class="row">
-                        <div class="col-8">
-                            {{ $comment->getCreatedAtDate() }}
-                            @if ($comment->created_at != $comment->updated_at)
-                            {{ __('labels.text_edited') }}
-                            @endif
-                        </div>
+                            <div class="card-footer">
+                                <div class="row">
+                                    <div class="col-7 x-text-ellipsis">
+                                        {{ $reply->getCreatedAtDate() }}
+                                        @if ($reply->created_at != $reply->updated_at)
+                                        {{ __('labels.text_edited') }}
+                                        @endif
+                                    </div>
 
-                        <div class="col-4 text-right x-text-ellipsis">
-                            @if ($comment->creator_user)
-                            {{ $comment->creator_user->name }}
-                            @elseif (!is_null($comment->creator_name) and $comment->creator_name !== "")
-                            {{ $comment->creator_name }}
-                            @endif
+                                    <div class="col-4 text-right x-text-ellipsis">
+                                        @if ($reply->creator_user)
+                                        {{ $reply->creator_user->name }}
+                                        @elseif (!is_null($reply->creator_name) and $reply->creator_name !== "")
+                                        {{ $reply->creator_name }}
+                                        @endif
+                                    </div>
+
+                                    <div class="col-1">
+
+                                        <!-- TODO menu -->
+
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
+                @endforeach
             </div>
             @endforeach
         </div>
     </div>
-
-
 </div>
 @endsection

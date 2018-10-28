@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Database;
 use App\Http\Controllers\Controller;
 use App\Models\Comment;
 use App\Models\Forum;
+use App\Models\Reply;
 use App\Models\Thread;
 use Illuminate\Http\Request;
 
@@ -77,17 +78,21 @@ class ThreadController extends Controller
         session(['forum_id' => $forum->id]);
 
         // get lines of Comment (ordered by updated_at)
-        $ln_comments = Comment::where('thread_id', $thread->id)->orderBy('updated_at', 'desc');
+        $ln_comments = Comment::where('thread_id', $thread->id)->orderBy('updated_at');
         $comments = $ln_comments->get();
 
-
-
+        // get lines of Reply (ordered by created_at) of each comment
+        $dict_replies = array();
+        $comment_ids = $ln_comments->pluck('id');
+        foreach ($comment_ids as $comment_id) {
+            $dict_replies[$comment_id] = Reply::where('comment_id', $comment_id)->orderBy('created_at')->get();
+        }
 
         return view('thread', [
             'forum' => $forum,
             'thread' => $thread,
             'comments' => $comments,
-
+            'dict_replies' => $dict_replies
         ]);
     }
 
