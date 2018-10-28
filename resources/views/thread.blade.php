@@ -4,7 +4,12 @@
 {{ $thread->title }} / {{ $forum->title }}
 @endsection
 
+@section('titlelink')
+{{ route('forums.show', ['forum' => $forum]) }}
+@endsection
+
 @section('head')
+<script src="{{ asset('js/jquery.autosize.js') }}"></script>
 <link href="{{ asset('css/thread.css') }}" rel="stylesheet">
 @endsection
 
@@ -216,4 +221,12 @@
         </div>
     </div>
 </div>
+
+<script>
+$(document).ready(function(){
+    // activate autosize
+    autosize($('textarea'));
+});
+</script>
+
 @endsection

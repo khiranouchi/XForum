@@ -18,7 +18,7 @@ class Reply extends Model
 
     public function getCreatedAtDate()
     {
-        return $this->created_at->format('Y/m/d');
+        return $this->created_at->format('y/m/d');
     }
     public function getCreatedAtFull()
     {

@@ -35,7 +35,13 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
+                <a class="navbar-brand"
+                   @if (View::hasSection('titlelink'))
+                   href="@yield('titlelink')"
+                   @else
+                   href="{{ url('/') }}"
+                   @endif
+                   >
                     @if (View::hasSection('subtitle'))
                         @yield('subtitle') / {{ config('app.name', 'XForum') }}
                     @else
