@@ -45,7 +45,24 @@ class ReplyController extends Controller
      */
     public function store(Request $request, Forum $forum, Thread $thread, Comment $comment)
     {
-        // TODO
+        // verify forum_id with one in session
+        if ($forum->id !== session('forum_id')) {
+            return abort(419);
+        }
+
+        $reply = new Reply;
+
+        $reply->comment_id = $comment->id;
+        $reply->content = $request->content;
+        if($request->user()) {
+            $reply->creator_user_id = $request->user()->id;
+        } else {
+            $reply->creator_name = $request->creator_name;
+        }
+
+        $reply->save();
+
+        return redirect()->route('threads.show', ['forum' => $forum, 'thread' => $thread]);
     }
 
     /**

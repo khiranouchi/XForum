@@ -44,7 +44,25 @@ class CommentController extends Controller
      */
     public function store(Request $request, Forum $forum, Thread $thread)
     {
-        // TODO
+        // verify forum_id with one in session
+        if ($forum->id !== session('forum_id')) {
+            return abort(419);
+        }
+
+        $comment = new Comment;
+
+        $comment->thread_id = $thread->id;
+        $comment->title = $request->title;
+        $comment->content = $request->content;
+        if($request->user()) {
+            $comment->creator_user_id = $request->user()->id;
+        } else {
+            $comment->creator_name = $request->creator_name;
+        }
+
+        $comment->save();
+
+        return redirect()->route('threads.show', ['forum' => $forum, 'thread' => $thread]);
     }
 
     /**

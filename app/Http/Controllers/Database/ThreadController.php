@@ -79,7 +79,7 @@ class ThreadController extends Controller
         session(['forum_id' => $forum->id]);
 
         // get lines of Comment (ordered by updated_at)
-        $ln_comments = Comment::where('thread_id', $thread->id)->orderBy('updated_at');
+        $ln_comments = Comment::where('thread_id', $thread->id)->orderBy('created_at');
         $comments = $ln_comments->get();
 
         // get lines of Reply (ordered by created_at) of each comment
