@@ -33,3 +33,16 @@
 .form-group:last-child {
 	margin-bottom: 0;
 }
+
+
+/*************************************************
+ ** bootstrap dropdown (override) ****************
+ *************************************************/
+
+.dropdown-toggle:after {
+	content: none;
+}
+
+.dropdown-toggle:hover {
+	cursor: pointer;
+}

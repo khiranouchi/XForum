@@ -45,6 +45,8 @@ return [
     'btn_create_thread' => 'Create',
     'btn_create_comment' => 'Post',
     'btn_create_reply' => 'Post',
+    'dropdown_edit' => 'Edit',
+    'dropdown_delete' => 'Delete',
 
     /*
      * Others
