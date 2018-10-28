@@ -86,6 +86,7 @@ class ThreadController extends Controller
         return view('thread', [
             'forum' => $forum,
             'thread' => $thread,
+            'comments' => $comments,
 
         ]);
     }

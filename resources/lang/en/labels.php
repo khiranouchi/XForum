@@ -8,6 +8,7 @@ return [
     'sectitle_create_thread' => 'Create New Thread',
     'sectitle_forum_login' => 'Enter the password',
     'sectitle_thread_list' => 'Threads',
+    'sectitle_comment_list' => 'Comments',
 
     /*
      * Labels
@@ -42,4 +43,6 @@ return [
      * Others
      */
     'text_no_description' => '(no description)',
+    'text_no_title' => '(no title)',
+    'text_edited' => '(edited)',
 ];

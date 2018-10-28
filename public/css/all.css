@@ -9,6 +9,13 @@
 	margin-bottom: 0;
 }
 
+.x-subpart {
+	margin-bottom: 0.75rem;
+}
+.x-subpart:last-child {
+	margin-bottom: 0;
+}
+
 
 /*************************************************
  ** bootstrap card *******************************
