@@ -26,7 +26,7 @@ class ForumLoginController extends Controller
      */
     public function showLoginForm(Request $request, Forum $forum)
     {
-        return view('forum_login', ['forum'=>$forum]);
+        return view('auth.forum_login', ['forum'=>$forum]);
     }
 
     /**
