@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Database;
 
 use App\Http\Controllers\Controller;
+use App\Models\Forum;
 use App\Models\Thread;
 use Illuminate\Http\Request;
 
@@ -34,15 +35,15 @@ class ThreadController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Forum $forum)
     {
         $thread = new Thread;
 
         // verify forum_id with one in session
-        if ($request->forum_id !== session('forum_id')) {
+        if ($forum->id !== session('forum_id')) {
             return abort(419);
         }
-        $thread->forum_id = $request->forum_id;
+        $thread->forum_id = $forum->id;
 
         $thread->title = $request->title;
         $thread->description = $request->description;
@@ -54,7 +55,7 @@ class ThreadController extends Controller
 
         $thread->save();
 
-        // TODO
+        return redirect()->route('threads.show', ['forum' => $forum, 'thread' => $thread]);
     }
 
     /**
@@ -63,7 +64,7 @@ class ThreadController extends Controller
      * @param  \App\Models\Thread  $thread
      * @return \Illuminate\Http\Response
      */
-    public function show(Thread $thread)
+    public function show(Forum $forum, Thread $thread)
     {
         //
     }
@@ -86,7 +87,7 @@ class ThreadController extends Controller
      * @param  \App\Models\Thread  $thread
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Thread $thread)
+    public function update(Request $request, Forum $forum, Thread $thread)
     {
         //
     }
@@ -97,7 +98,7 @@ class ThreadController extends Controller
      * @param  \App\Models\Thread  $thread
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Thread $thread)
+    public function destroy(Forum $forum, Thread $thread)
     {
         //
     }

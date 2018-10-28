@@ -50,10 +50,8 @@
                 </div>
 
                 <div class="card-body" id="z_create_thread_form_body" style="display: none">
-                    <form method="POST" action="{{ route('threads.store') }}">
+                    <form method="POST" action="{{ route('threads.store', ['forum' => $forum->id]) }}">
                         @csrf
-
-                        <input type="hidden" name="forum_id" value="{{ $forum->id }}">
 
                         <!-- title -->
                         <div class="form-group row">
