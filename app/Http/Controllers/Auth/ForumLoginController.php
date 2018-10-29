@@ -26,6 +26,15 @@ class ForumLoginController extends Controller
      */
     public function showLoginForm(Request $request, Forum $forum)
     {
+        // remove string config('const.LOGIN_PATH') from current url (eg. '.../abc/login' -> '.../abc')
+        $login_path = '/'.config('const.LOGIN_PATH');
+        $cur_url = url()->current();
+        if (substr($cur_url, - strlen($login_path)) !== $login_path) {
+            return abort(500);
+        }
+        $redirect_url = substr($cur_url, 0, strlen($cur_url) - strlen($login_path));
+        session(['redirect_to' => $redirect_url]);
+
         return view('auth.forum_login', ['forum'=>$forum]);
     }
 

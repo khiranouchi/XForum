@@ -21,8 +21,6 @@ class ForumAuthenticate
      */
     public function handle(Request $request, Closure $next)
     {
-        session(['redirect_to' => url()->current()]);
-
         $this->authenticate($request);
         
         return $next($request);

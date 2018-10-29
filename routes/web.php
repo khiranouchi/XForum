@@ -18,8 +18,8 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 // auth to forums
-Route::get('/forums/{forum}/login', 'Auth\\ForumLoginController@showLoginForm')->name('forums.showLoginForm');
-Route::post('/forums/login', 'Auth\\ForumLoginController@authenticate')->name('forums.authenticate');
+Route::get('/forums/{forum}/'.config('const.LOGIN_PATH'), 'Auth\\ForumLoginController@showLoginForm')->name('forums.showLoginForm');
+Route::post('/forums/'.config('const.LOGIN_PATH'), 'Auth\\ForumLoginController@authenticate')->name('forums.authenticate');
 
 // resource Forum
 Route::resource('forums', 'Database\\ForumController');
