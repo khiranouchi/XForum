@@ -76,12 +76,20 @@ class ReplyController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
+     * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\Reply  $reply
      * @return \Illuminate\Http\Response
      */
-    public function edit(Forum $forum, Thread $thread, Comment $comment, Reply $reply)
+    public function edit(Request $request, Forum $forum, Thread $thread, Comment $comment, Reply $reply)
     {
-        //
+        return view('forms.reply_form', [
+            'forum' => $forum,
+            'thread' => $thread,
+            'comment' => $comment,
+            'reply' => $reply,
+            'user' => $request->user(),
+            'method' => 'PATCH',
+        ]);
     }
 
     /**

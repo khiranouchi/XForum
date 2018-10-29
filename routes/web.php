@@ -40,3 +40,4 @@ Route::get('/forums/{forum}/threads/{thread}/comments/{comment}/edit', 'Database
 Route::post('/forums/{forum}/threads/{thread}/comments/{comment}/replies', 'Database\\ReplyController@store')->name('replies.store');
 Route::patch('/forums/{forum}/threads/{thread}/comments/{comment}/replies/{reply}', 'Database\\ReplyController@update')->name('replies.update');
 Route::delete('/forums/{forum}/threads/{thread}/comments/{comment}/replies/{reply}', 'Database\\ReplyController@destroy')->name('replies.destroy');
+Route::get('/forums/{forum}/threads/{thread}/comments/{comment}/replies/{reply}/edit', 'Database\\ReplyController@edit')->name('replies.edit');

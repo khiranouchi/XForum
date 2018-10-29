@@ -124,7 +124,7 @@
                 <div class="row">
                     <div class="col-11 offset-1">
                         <div class="card">
-                            <div class="card-body">
+                            <div id="x_reply_content_{{ $reply->id }}" class="card-body">
                                 {!! nl2br(e($reply->content)) !!}
                             </div>
 
@@ -146,7 +146,10 @@
                                             </div>
                                             <div class="dropdown-menu" aria-labelledby="z_dropdown_{{ $reply->id }}">
                                                 <!-- edit reply -->
-                                                <a class="dropdown-item" href="#">{{ __('labels.dropdown_edit') }}</a>
+                                                <div class="dropdown-item"
+                                                     onclick="SwitchToEditMode('x_reply_content_{{ $reply->id }}', '{{ route('replies.edit', ['forum' => $forum->id, 'thread' => $thread->id, 'comment' => $comment->id, 'reply' => $reply->id]) }}')">
+                                                    {{ __('labels.dropdown_edit') }}
+                                                </div>
                                                 <!-- delete reply -->
                                                 <form method="post" name="z_form_reply_destroy_{{ $reply->id }}" class="z_check_dialog"
                                                       action="{{ route('replies.destroy', ['forum' => $forum->id, 'thread' => $thread->id, 'comment' => $comment->id, 'reply' => $reply->id]) }}">
@@ -189,28 +192,7 @@
                             </div>
 
                             <div class="card-body" id="z_create_reply_{{ $comment->id }}_form_body" style="display: none">
-                                <form method="POST" action="{{ route('replies.store', ['forum' => $forum->id, 'thread' => $thread->id, 'comment' => $comment->id]) }}">
-                                    @csrf
-
-                                    <div class="form-group">
-                                        <textarea name="content" id="content" class="form-control" value="{{ old('content') }}" required autofocus></textarea>
-                                    </div>
-
-                                    @if (!$user)
-                                    <div class="form-group row">
-                                        <div class="col-sm-7">
-                                            <input type="text" name="creator_name" id="creator_name" class="form-control"
-                                                   placeholder="{{ __('labels.form_reply_creator_name') }}" value="{{ old('creator_name') }}" autofocus>
-                                        </div>
-                                    </div>
-                                    @endif
-
-                                    <div class="form-group">
-                                        <button type="submit" class="btn btn-primary">
-                                            {{ __('labels.btn_create_reply') }}
-                                        </button>
-                                    </div>
-                                </form>
+                                @include('forms.reply_form', ['forum' => $forum, 'thread' => $thread, 'comment' => $comment, 'user' => $user, 'method' => 'POST'])
                             </div>
                         </div>
                     </div>
