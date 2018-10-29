@@ -101,8 +101,17 @@ class ReplyController extends Controller
      */
     public function update(Request $request, Forum $forum, Thread $thread, Comment $comment, Reply $reply)
     {
-        // TODO
-        return redirect(route('threads.show', ['forum' => $forum, 'thread' => $thread])."?scroll=".$request->scroll);
+        if ($request->isMethod('PATCH')) {
+            foreach ($reply->getAllColumnNames() as $field) {
+                if ($request->filled($field)) {
+                    $reply->$field = $request->$field;
+                }
+            }
+            $reply->save();
+            return redirect(route('threads.show', ['forum' => $forum, 'thread' => $thread])."?scroll=".$request->scroll);
+        }else{
+            return abort(501);
+        }
     }
 
     /**

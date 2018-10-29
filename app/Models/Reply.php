@@ -6,6 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Reply extends Model
 {
+    public function getAllColumnNames()
+    {
+        return ['content', 'creator_name'];
+    }
+
     /**
      * Subordinate relation.
      *
