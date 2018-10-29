@@ -72,30 +72,32 @@
 
                     <div class="card-footer">
                         <div class="row">
-                            <div class="col-6 x-text-ellipsis">
+                            <div class="col-7 x-text-ellipsis">
                                 {{ $comment->getCreatedAtDate() }}
                                 @if ($comment->created_at != $comment->updated_at)
                                 {{ __('labels.text_edited') }}
                                 @endif
                             </div>
 
-                            <div class="col-4 text-right x-text-ellipsis">
+                            <div class="col-5 dropdown">
                                 @if ($comment->creator_user)
-                                {{ $comment->creator_user->name }}
+                                    @if ($user and $user->id === $comment->creator_user->id)
+                                    <div class="dropdown-toggle text-right x-text-ellipsis" id="z_dropdown_{{ $comment->id }}"
+                                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        {{ $comment->creator_user->name }}
+                                    </div>
+                                    <div class="dropdown-menu" aria-labelledby="z_dropdown_{{ $comment->id }}">
+                                        <a class="dropdown-item" href="#">{{ __('labels.dropdown_edit') }}</a>
+                                        <a class="dropdown-item" href="#">{{ __('labels.dropdown_delete') }}</a>
+                                    </div>
+                                    @else
+                                    <div class="text-right x-text-ellipsis">
+                                        {{ $comment->creator_user->name }}
+                                    </div>
+                                    @endif
                                 @elseif (!is_null($comment->creator_name) and $comment->creator_name !== "")
-                                {{ $comment->creator_name }}
-                                @endif
-                            </div>
-
-                            <div class="col-2 dropdown">
-                                @if ($user and $comment->creator_user and $user->id === $comment->creator_user->id)
-                                <div class="dropdown-toggle text-right x-text-ellipsis" id="z_dropdown_{{ $comment->id }}"
-                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    &#8230;
-                                </div>
-                                <div class="dropdown-menu" aria-labelledby="z_dropdown_{{ $comment->id }}">
-                                    <a class="dropdown-item" href="#">{{ __('labels.dropdown_edit') }}</a>
-                                    <a class="dropdown-item" href="#">{{ __('labels.dropdown_delete') }}</a>
+                                <div class="text-right x-text-ellipsis">
+                                    {{ $comment->creator_name }}
                                 </div>
                                 @endif
                             </div>
@@ -114,30 +116,32 @@
 
                             <div class="card-footer">
                                 <div class="row">
-                                    <div class="col-6 x-text-ellipsis">
+                                    <div class="col-7 x-text-ellipsis">
                                         {{ $reply->getCreatedAtDate() }}
                                         @if ($reply->created_at != $reply->updated_at)
                                         {{ __('labels.text_edited') }}
                                         @endif
                                     </div>
 
-                                    <div class="col-4 text-right x-text-ellipsis">
+                                    <div class="col-5 dropdown">
                                         @if ($reply->creator_user)
-                                        {{ $reply->creator_user->name }}
+                                            @if ($user and $user->id === $reply->creator_user->id)
+                                            <div class="dropdown-toggle text-right x-text-ellipsis" id="z_dropdown_{{ $reply->id }}"
+                                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                {{ $reply->creator_user->name }}
+                                            </div>
+                                            <div class="dropdown-menu" aria-labelledby="z_dropdown_{{ $reply->id }}">
+                                                <a class="dropdown-item" href="#">{{ __('labels.dropdown_edit') }}</a>
+                                                <a class="dropdown-item" href="#">{{ __('labels.dropdown_delete') }}</a>
+                                            </div>
+                                            @else
+                                            <div class="text-right x-text-ellipsis">
+                                                {{ $reply->creator_user->name }}
+                                            </div>
+                                            @endif
                                         @elseif (!is_null($reply->creator_name) and $reply->creator_name !== "")
-                                        {{ $reply->creator_name }}
-                                        @endif
-                                    </div>
-
-                                    <div class="col-2 dropdown">
-                                        @if ($user and $reply->creator_user and $user->id === $reply->creator_user->id)
-                                        <div class="dropdown-toggle text-right x-text-ellipsis" id="z_dropdown_{{ $reply->id }}"
-                                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            &#8230;
-                                        </div>
-                                        <div class="dropdown-menu" aria-labelledby="z_dropdown_{{ $reply->id }}">
-                                            <a class="dropdown-item" href="#">{{ __('labels.dropdown_edit') }}</a>
-                                            <a class="dropdown-item" href="#">{{ __('labels.dropdown_delete') }}</a>
+                                        <div class="text-right x-text-ellipsis">
+                                            {{ $reply->creator_name }}
                                         </div>
                                         @endif
                                     </div>
