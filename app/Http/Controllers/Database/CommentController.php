@@ -102,11 +102,23 @@ class CommentController extends Controller
     /**
      * Remove the specified resource from storage.
      *
+     * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\Comment  $comment
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Forum $forum, Thread $thread, Comment $comment)
+    public function destroy(Request $request, Forum $forum, Thread $thread, Comment $comment)
     {
-        // TODO
+        // verify forum_id with one in session
+        if ($forum->id !== session('forum_id')) {
+            return abort(419);
+        }
+
+        // verify user_id
+        if (!$request->user() or !$comment->creator_user_id or $request->user()->id !== $comment->creator_user_id) {
+            return abort(419);
+        }
+
+        $comment->delete();
+        return redirect()->route('threads.show', ['forum' => $forum, 'thread' => $thread]);
     }
 }

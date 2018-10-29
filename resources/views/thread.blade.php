@@ -87,8 +87,19 @@
                                         {{ $comment->creator_user->name }}
                                     </div>
                                     <div class="dropdown-menu" aria-labelledby="z_dropdown_{{ $comment->id }}">
+                                        <!-- edit comment -->
                                         <a class="dropdown-item" href="#">{{ __('labels.dropdown_edit') }}</a>
-                                        <a class="dropdown-item" href="#">{{ __('labels.dropdown_delete') }}</a>
+                                        <!-- delete comment -->
+                                        <form class="dropdown-item"
+                                              method="post" name="z_form_comment_destroy_{{ $comment->id }}"
+                                              action="{{ route('comments.destroy', ['forum' => $forum->id, 'thread' => $thread->id, 'comment' => $comment->id]) }}">
+                                            @csrf
+                                            <input name="_method" type="hidden" value="DELETE">
+                                            <div class=" x-hover-pointer"
+                                                 onclick="document.z_form_comment_destroy_{{ $comment->id }}.submit()">
+                                                {{ __('labels.dropdown_delete') }}
+                                            </div>
+                                        </form>
                                     </div>
                                     @else
                                     <div class="text-right x-text-ellipsis">
@@ -131,8 +142,19 @@
                                                 {{ $reply->creator_user->name }}
                                             </div>
                                             <div class="dropdown-menu" aria-labelledby="z_dropdown_{{ $reply->id }}">
+                                                <!-- edit reply -->
                                                 <a class="dropdown-item" href="#">{{ __('labels.dropdown_edit') }}</a>
-                                                <a class="dropdown-item" href="#">{{ __('labels.dropdown_delete') }}</a>
+                                                <!-- delete reply -->
+                                                <form class="dropdown-item"
+                                                      method="post" name="z_form_reply_destroy_{{ $reply->id }}"
+                                                      action="{{ route('replies.destroy', ['forum' => $forum->id, 'thread' => $thread->id, 'comment' => $comment->id, 'reply' => $reply->id]) }}">
+                                                    @csrf
+                                                    <input name="_method" type="hidden" value="DELETE">
+                                                    <div class=" x-hover-pointer"
+                                                         onclick="document.z_form_reply_destroy_{{ $reply->id }}.submit()">
+                                                        {{ __('labels.dropdown_delete') }}
+                                                    </div>
+                                                </form>
                                             </div>
                                             @else
                                             <div class="text-right x-text-ellipsis">

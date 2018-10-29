@@ -102,11 +102,23 @@ class ReplyController extends Controller
     /**
      * Remove the specified resource from storage.
      *
+     * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\Reply  $reply
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Forum $forum, Thread $thread, Comment $comment, Reply $reply)
+    public function destroy(Request $request, Forum $forum, Thread $thread, Comment $comment, Reply $reply)
     {
-        // TODO
+        // verify forum_id with one in session
+        if ($forum->id !== session('forum_id')) {
+            return abort(419);
+        }
+
+        // verify user_id
+        if (!$request->user() or !$reply->creator_user_id or $request->user()->id !== $reply->creator_user_id) {
+            return abort(419);
+        }
+
+        $reply->delete();
+        return redirect()->route('threads.show', ['forum' => $forum, 'thread' => $thread]);
     }
 }
