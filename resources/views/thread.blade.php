@@ -10,6 +10,7 @@
 
 @section('head')
 <script src="{{ asset('js/jquery.autosize.js') }}"></script>
+<script src="{{ asset('js/thread.js') }}"></script>
 <link href="{{ asset('css/thread.css') }}" rel="stylesheet">
 @endsection
 
@@ -66,7 +67,7 @@
                         </div>
                     </div>
 
-                    <div class="card-body">
+                    <div id="x_comment_content_{{ $comment->id }}" class="card-body">
                         {!! nl2br(e($comment->content)) !!}
                     </div>
 
@@ -88,7 +89,10 @@
                                     </div>
                                     <div class="dropdown-menu" aria-labelledby="z_dropdown_{{ $comment->id }}">
                                         <!-- edit comment -->
-                                        <a class="dropdown-item" href="#">{{ __('labels.dropdown_edit') }}</a>
+                                        <div class="dropdown-item"
+                                             onclick="SwitchToEditMode('x_comment_content_{{ $comment->id }}', '{{ route('comments.edit', ['forum' => $forum->id, 'thread' => $thread->id, 'comment' => $comment->id]) }}')">
+                                            {{ __('labels.dropdown_edit') }}
+                                        </div>
                                         <!-- delete comment -->
                                         <form method="post" name="z_form_comment_destroy_{{ $comment->id }}" class="z_check_dialog"
                                               action="{{ route('comments.destroy', ['forum' => $forum->id, 'thread' => $thread->id, 'comment' => $comment->id]) }}">
@@ -226,33 +230,7 @@
                     </div>
 
                     <div class="card-body" id="z_create_comment_form_body" style="display: none">
-                        <form method="POST" action="{{ route('comments.store', ['forum' => $forum->id, 'thread' => $thread->id]) }}">
-                            @csrf
-
-                            <div class="form-group">
-                                <input type="text" name="title" id="title" class="form-control"
-                                       placeholder="{{ __('labels.form_comment_title') }}" value="{{ old('title') }}" autofocus>
-                            </div>
-
-                            <div class="form-group">
-                                <textarea name="content" id="content" class="form-control" value="{{ old('content') }}" required autofocus></textarea>
-                            </div>
-
-                            @if (!$user)
-                            <div class="form-group row">
-                                <div class="col-sm-6">
-                                    <input type="text" name="creator_name" id="creator_name" class="form-control"
-                                           placeholder="{{ __('labels.form_comment_creator_name') }}" value="{{ old('creator_name') }}" autofocus>
-                                </div>
-                            </div>
-                            @endif
-
-                            <div class="form-group">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('labels.btn_create_comment') }}
-                                </button>
-                            </div>
-                        </form>
+                        @include('forms.comment_form', ['forum' => $forum, 'thread' => $thread, 'user' => $user, 'method' => 'POST'])
                     </div>
                 </div>
             </div>

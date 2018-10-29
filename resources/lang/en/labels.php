@@ -44,7 +44,9 @@ return [
     'btn_login_forum' => 'OK',
     'btn_create_thread' => 'Create',
     'btn_create_comment' => 'Post',
+    'btn_update_comment' => 'Update',
     'btn_create_reply' => 'Post',
+    'btn_update_reply' => 'Update',
     'dropdown_edit' => 'Edit',
     'dropdown_delete' => 'Delete',
 

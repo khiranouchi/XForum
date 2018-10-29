@@ -76,12 +76,19 @@ class CommentController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
+     * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\Comment  $comment
      * @return \Illuminate\Http\Response
      */
-    public function edit(Forum $forum, Thread $thread, Comment $comment)
+    public function edit(Request $request, Forum $forum, Thread $thread, Comment $comment)
     {
-        //
+        return view('forms.comment_form', [
+            'forum' => $forum,
+            'thread' => $thread,
+            'comment' => $comment,
+            'user' => $request->user(),
+            'method' => 'PATCH',
+        ]);
     }
 
     /**

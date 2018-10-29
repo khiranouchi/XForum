@@ -34,6 +34,7 @@ Route::delete('/forums/{forum}/threads/{thread}', 'Database\\ThreadController@de
 Route::post('/forums/{forum}/threads/{thread}/comments', 'Database\\CommentController@store')->name('comments.store');
 Route::patch('/forums/{forum}/threads/{thread}/comments/{comment}', 'Database\\CommentController@update')->name('comments.update');
 Route::delete('/forums/{forum}/threads/{thread}/comments/{comment}', 'Database\\CommentController@destroy')->name('comments.destroy');
+Route::get('/forums/{forum}/threads/{thread}/comments/{comment}/edit', 'Database\\CommentController@edit')->name('comments.edit');
 
 // resource Reply
 Route::post('/forums/{forum}/threads/{thread}/comments/{comment}/replies', 'Database\\ReplyController@store')->name('replies.store');
