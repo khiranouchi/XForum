@@ -59,7 +59,7 @@ class ReplyController extends Controller
 
         $reply->save();
 
-        return redirect()->route('threads.show', ['forum' => $forum, 'thread' => $thread]);
+        return redirect(route('threads.show', ['forum' => $forum, 'thread' => $thread])."?scroll=".$request->scroll);
     }
 
     /**
@@ -94,6 +94,7 @@ class ReplyController extends Controller
     public function update(Request $request, Forum $forum, Thread $thread, Comment $comment, Reply $reply)
     {
         // TODO
+        return redirect(route('threads.show', ['forum' => $forum, 'thread' => $thread])."?scroll=".$request->scroll);
     }
 
     /**
@@ -106,6 +107,6 @@ class ReplyController extends Controller
     public function destroy(Request $request, Forum $forum, Thread $thread, Comment $comment, Reply $reply)
     {
         $reply->delete();
-        return redirect()->route('threads.show', ['forum' => $forum, 'thread' => $thread]);
+        return redirect(route('threads.show', ['forum' => $forum, 'thread' => $thread])."?scroll=".$request->scroll);
     }
 }

@@ -86,12 +86,18 @@ class ThreadController extends Controller
             $dict_replies[$comment_id] = Reply::where('comment_id', $comment_id)->orderBy('created_at')->get();
         }
 
+        $scroll = 0;
+        if ($request->filled('scroll')) {
+            $scroll = $request->scroll;
+        }
+
         return view('thread', [
             'forum' => $forum,
             'thread' => $thread,
             'comments' => $comments,
             'dict_replies' => $dict_replies,
-            'user' => $request->user()
+            'user' => $request->user(),
+            'scroll' => $scroll
         ]);
     }
 

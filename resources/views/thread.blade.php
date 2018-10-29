@@ -90,15 +90,14 @@
                                         <!-- edit comment -->
                                         <a class="dropdown-item" href="#">{{ __('labels.dropdown_edit') }}</a>
                                         <!-- delete comment -->
-                                        <form class="dropdown-item"
-                                              method="post" name="z_form_comment_destroy_{{ $comment->id }}"
+                                        <form method="post" name="z_form_comment_destroy_{{ $comment->id }}"
                                               action="{{ route('comments.destroy', ['forum' => $forum->id, 'thread' => $thread->id, 'comment' => $comment->id]) }}">
                                             @csrf
                                             <input name="_method" type="hidden" value="DELETE">
-                                            <div class=" x-hover-pointer"
-                                                 onclick="document.z_form_comment_destroy_{{ $comment->id }}.submit()">
+                                            <a class="dropdown-item"
+                                               href="javascript:document.z_form_comment_destroy_{{ $comment->id }}.submit();">
                                                 {{ __('labels.dropdown_delete') }}
-                                            </div>
+                                            </a>
                                         </form>
                                     </div>
                                     @else
@@ -145,15 +144,14 @@
                                                 <!-- edit reply -->
                                                 <a class="dropdown-item" href="#">{{ __('labels.dropdown_edit') }}</a>
                                                 <!-- delete reply -->
-                                                <form class="dropdown-item"
-                                                      method="post" name="z_form_reply_destroy_{{ $reply->id }}"
+                                                <form method="post" name="z_form_reply_destroy_{{ $reply->id }}"
                                                       action="{{ route('replies.destroy', ['forum' => $forum->id, 'thread' => $thread->id, 'comment' => $comment->id, 'reply' => $reply->id]) }}">
                                                     @csrf
                                                     <input name="_method" type="hidden" value="DELETE">
-                                                    <div class=" x-hover-pointer"
-                                                         onclick="document.z_form_reply_destroy_{{ $reply->id }}.submit()">
+                                                    <a class="dropdown-item"
+                                                       href="javascript:document.z_form_reply_destroy_{{ $reply->id }}.submit();">
                                                         {{ __('labels.dropdown_delete') }}
-                                                    </div>
+                                                    </a>
                                                 </form>
                                             </div>
                                             @else
@@ -266,7 +264,14 @@
 $(document).ready(function(){
     // activate autosize
     autosize($('textarea'));
+    // scroll
+    $(window).scrollTop({{ $scroll }});
+});
+
+// all forms save scroll position before submit
+$('form').on('click', function(){
+    var tmp = $(window).scrollTop();
+    $(this).append('<input name="scroll" type="hidden" value="' + tmp + '">');
 });
 </script>
-
 @endsection
