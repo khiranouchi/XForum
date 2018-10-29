@@ -14,7 +14,7 @@ class ThreadController extends Controller
     public function __construct()
     {
         $this->middleware('auth.forum');
-        $this->middleware('verify.forum');
+        $this->middleware('verify.forum')->except('store');;
     }
 
     /**
