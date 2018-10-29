@@ -16,6 +16,7 @@ class ReplyController extends Controller
         $this->middleware('verify.current.forum');
         $this->middleware('auth.forum');
         $this->middleware('verify.forum.inclusion');
+        $this->middleware('verify.creator:reply')->except('store'); // user check for update/delete
     }
 
     /**
@@ -104,11 +105,6 @@ class ReplyController extends Controller
      */
     public function destroy(Request $request, Forum $forum, Thread $thread, Comment $comment, Reply $reply)
     {
-        // verify user_id
-        if (!$request->user() or !$reply->creator_user_id or $request->user()->id !== $reply->creator_user_id) {
-            return abort(419);
-        }
-
         $reply->delete();
         return redirect()->route('threads.show', ['forum' => $forum, 'thread' => $thread]);
     }

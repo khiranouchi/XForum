@@ -15,6 +15,7 @@ class CommentController extends Controller
         $this->middleware('verify.current.forum');
         $this->middleware('auth.forum');
         $this->middleware('verify.forum.inclusion');
+        $this->middleware('verify.creator:comment')->except('store'); // user check for update/delete
     }
 
     /**
@@ -104,11 +105,6 @@ class CommentController extends Controller
      */
     public function destroy(Request $request, Forum $forum, Thread $thread, Comment $comment)
     {
-        // verify user_id
-        if (!$request->user() or !$comment->creator_user_id or $request->user()->id !== $comment->creator_user_id) {
-            return abort(419);
-        }
-
         $comment->delete();
         return redirect()->route('threads.show', ['forum' => $forum, 'thread' => $thread]);
     }
