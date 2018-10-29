@@ -95,7 +95,8 @@
                                         </div>
                                         <!-- delete comment -->
                                         <form method="post" name="z_form_comment_destroy_{{ $comment->id }}" class="z_check_dialog"
-                                              action="{{ route('comments.destroy', ['forum' => $forum->id, 'thread' => $thread->id, 'comment' => $comment->id]) }}">
+                                              action="{{ route('comments.destroy', ['forum' => $forum->id, 'thread' => $thread->id, 'comment' => $comment->id]) }}"
+                                              onclick="SaveScroll(this);ShowCheckDialog('{{ __('texts.dialog_delete_comment') }}');">
                                             @csrf
                                             <input name="_method" type="hidden" value="DELETE">
                                             <a class="dropdown-item"
@@ -152,7 +153,8 @@
                                                 </div>
                                                 <!-- delete reply -->
                                                 <form method="post" name="z_form_reply_destroy_{{ $reply->id }}" class="z_check_dialog"
-                                                      action="{{ route('replies.destroy', ['forum' => $forum->id, 'thread' => $thread->id, 'comment' => $comment->id, 'reply' => $reply->id]) }}">
+                                                      action="{{ route('replies.destroy', ['forum' => $forum->id, 'thread' => $thread->id, 'comment' => $comment->id, 'reply' => $reply->id]) }}"
+                                                      onclick="SaveScroll(this);ShowCheckDialog('{{ __('texts.dialog_delete_reply') }}');">
                                                     @csrf
                                                     <input name="_method" type="hidden" value="DELETE">
                                                     <a class="dropdown-item"
@@ -226,17 +228,6 @@ $(document).ready(function(){
     autosize($('textarea'));
     // scroll
     $(window).scrollTop({{ $scroll }});
-});
-
-// all forms save scroll position before submit
-$('form').on('click', function(){
-    var tmp = $(window).scrollTop();
-    $(this).append('<input name="scroll" type="hidden" value="' + tmp + '">');
-});
-
-//delete forms show check dialog before submit (must be the last listener of onclick)
-$('form.z_check_dialog').on('click', function(){
-    return ShowCheckDialog("Do you really delete this?");
 });
 </script>
 @endsection

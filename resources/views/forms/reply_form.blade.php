@@ -1,4 +1,5 @@
 <form method="POST"
+      onclick="SaveScroll(this);"
       @if ($method === 'PATCH')
       action="{{ route('replies.update', ['forum' => $forum->id, 'thread' => $thread->id, 'comment' => $comment->id, 'reply' => $reply->id]) }}"
       @else
