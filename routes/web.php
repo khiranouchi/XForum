@@ -29,6 +29,7 @@ Route::post('/forums/{forum}/threads', 'Database\\ThreadController@store')->name
 Route::get('/forums/{forum}/threads/{thread}', 'Database\\ThreadController@show')->name('threads.show');
 Route::patch('/forums/{forum}/threads/{thread}', 'Database\\ThreadController@update')->name('threads.update');
 Route::delete('/forums/{forum}/threads/{thread}', 'Database\\ThreadController@destroy')->name('threads.destroy');
+Route::get('/forums/{forum}/threads/{thread}/edit', 'Database\\ThreadController@edit')->name('threads.edit');
 
 // resource Comment
 Route::post('/forums/{forum}/threads/{thread}/comments', 'Database\\CommentController@store')->name('comments.store');

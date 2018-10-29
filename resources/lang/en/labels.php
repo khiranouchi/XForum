@@ -43,6 +43,8 @@ return [
     'btn_create_forum' => 'Create',
     'btn_login_forum' => 'OK',
     'btn_create_thread' => 'Create',
+    'btn_edit_thread' => 'Update info',
+    'btn_update_thread' => 'Update',
     'btn_create_comment' => 'Post',
     'btn_update_comment' => 'Update',
     'btn_create_reply' => 'Post',

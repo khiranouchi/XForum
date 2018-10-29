@@ -20,7 +20,7 @@
     <div class="x-part row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-body">
+                <div id="x_thread_info" class="card-body">
                     <dl class="row">
                         <dt class="col-sm-3">{{ __('labels.thread_title') }}</dt>
                         <dd class="col-sm-9">{{ $thread->title }}</dd>
@@ -37,10 +37,14 @@
                         <dt class="col-sm-3">{{ __('labels.thread_creator_name') }}</dt>
                         <dd class="col-sm-9">{{ $thread->creator_name }}</dd>
                         @endif
+
+                        <dd class="col-sm-12">
+                            <button class="btn btn-outline-secondary x-btn-small-padding"
+                                    onclick="SwitchToEditMode('x_thread_info', '{{ route('threads.edit', ['forum' => $forum->id, 'thread' => $thread->id]) }}')">
+                                {{ __('labels.btn_edit_thread') }}
+                            </button>
+                        </dd>
                     </dl>
-
-                    <!-- TODO button to edit info -->
-
                 </div>
             </div>
         </div>

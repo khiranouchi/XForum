@@ -104,12 +104,18 @@ class ThreadController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
+     * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\Thread  $thread
      * @return \Illuminate\Http\Response
      */
-    public function edit(Forum $forum, Thread $thread)
+    public function edit(Request $request, Forum $forum, Thread $thread)
     {
-        //
+        return view('forms.thread_form', [
+            'forum' => $forum,
+            'thread' => $thread,
+            'user' => $request->user(),
+            'method' => 'PATCH'
+        ]);
     }
 
     /**

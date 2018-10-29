@@ -50,43 +50,7 @@
                 </div>
 
                 <div class="card-body" id="z_create_thread_form_body" style="display: none">
-                    <form method="POST" action="{{ route('threads.store', ['forum' => $forum->id]) }}">
-                        @csrf
-
-                        <!-- title -->
-                        <div class="form-group row">
-                            <label for="title" class="col-lg-4 col-form-label text-lg-right">{{ __('labels.form_thread_title') }}</label>
-                            <div class="col-lg-6">
-                                <input type="text" name="title" id="title" class="form-control" value="{{ old('title') }}" required autofocus>
-                            </div>
-                        </div>
-
-                        <!-- description -->
-                        <div class="form-group row">
-                            <label for="description" class="col-lg-4 col-form-label text-lg-right">{{ __('labels.form_thread_description') }}</label>
-                            <div class="col-lg-6">
-                                <textarea name="description" id="description" class="form-control" value="{{ old('description') }}" autofocus></textarea>
-                            </div>
-                        </div>
-
-                        @if (!$user)
-                        <!-- password -->
-                        <div class="form-group row">
-                            <label for="creator_name" class="col-lg-4 col-form-label text-lg-right">{{ __('labels.form_thread_creator_name') }}</label>
-                            <div class="col-lg-6">
-                                <input type="text" name="creator_name" id="creator_name" class="form-control" value="{{ old('creator_name') }}" autofocus>
-                            </div>
-                        </div>
-                        @endif
-
-                        <div class="form-group row">
-                            <div class="col-lg-8 offset-lg-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('labels.btn_create_thread') }}
-                                </button>
-                            </div>
-                        </div>
-                    </form>
+                    @include('forms.thread_form', ['forum' => $forum, 'user' => $user, 'method' => 'POST'])
                 </div>
             </div>
         </div>
