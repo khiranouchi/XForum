@@ -16,6 +16,7 @@ class ThreadController extends Controller
         $this->middleware('verify.current.forum')->except('show');
         $this->middleware('auth.forum');
         $this->middleware('verify.forum.inclusion')->except('store');;
+        $this->middleware('verify.creator:thread')->except(['store', 'show', 'edit', 'update']); // user check for delete
     }
 
     /**
@@ -148,6 +149,7 @@ class ThreadController extends Controller
      */
     public function destroy(Forum $forum, Thread $thread)
     {
-        // TODO
+        $thread->delete();
+        return redirect()->route('forums.show', ['forum' => $forum]);
     }
 }

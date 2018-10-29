@@ -16,7 +16,7 @@ class ReplyController extends Controller
         $this->middleware('verify.current.forum');
         $this->middleware('auth.forum');
         $this->middleware('verify.forum.inclusion');
-        $this->middleware('verify.creator:reply')->except('store'); // user check for update/delete
+        $this->middleware('verify.creator:reply')->except('store'); // user check for edit/update/delete
     }
 
     /**

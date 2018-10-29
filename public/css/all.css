@@ -89,3 +89,7 @@
     padding-top: 0.05rem;
     padding-bottom: 0rem;
 }
+
+.x-inline-form {
+	display: inline;
+}

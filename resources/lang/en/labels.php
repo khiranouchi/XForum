@@ -47,6 +47,7 @@ return [
     'btn_create_thread' => 'Create',
     'btn_edit_thread' => 'Update info',
     'btn_update_thread' => 'Update',
+    'btn_delete_thread' => 'Delete this thread',
     'btn_create_comment' => 'Post',
     'btn_update_comment' => 'Update',
     'btn_create_reply' => 'Post',

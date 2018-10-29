@@ -39,10 +39,23 @@
                         @endif
 
                         <dd class="col-sm-12">
-                            <button class="btn btn-outline-secondary x-btn-small-padding"
+                            <!-- edit thread -->
+                            <button class="btn btn-outline-secondary x-btn-small-padding x-inline-form"
                                     onclick="SwitchToEditMode('x_thread_info', '{{ route('threads.edit', ['forum' => $forum->id, 'thread' => $thread->id]) }}')">
                                 {{ __('labels.btn_edit_thread') }}
                             </button>
+                            <!-- delete thread -->
+                            @if ($thread->creator_user and $user and $user->id === $thread->creator_user_id)
+                            <form class="x-inline-form"
+                                  action="{{ route('threads.destroy', ['forum' => $forum, 'thread' => $thread]) }}" method="post"
+                                  onclick="ShowCheckDialog('{{ __('texts.dialog_delete_thread_1') }}', '{{ __('texts.dialog_delete_thread_2') }}');">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-outline-secondary x-btn-small-padding">
+                                    {{ __('labels.btn_delete_thread') }}
+                                </button>
+                            </form>
+                            @endif
                         </dd>
                     </dl>
                 </div>

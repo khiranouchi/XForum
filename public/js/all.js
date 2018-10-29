@@ -18,8 +18,10 @@ function ShowHideBlock(switchObj, targetId) {
  * Show check dialog.
  * Prevent default if not confirmed.
  */
-function ShowCheckDialog(message="Do you really submit?") {
+function ShowCheckDialog(message="Do you really submit?", message2=null) {
     if (!confirm(message)) {
+        event.preventDefault();
+    } else if (message2 && !confirm(message2)) {
         event.preventDefault();
     }
 }
