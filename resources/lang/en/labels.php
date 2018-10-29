@@ -42,6 +42,8 @@ return [
      */
     'btn_create_forum' => 'Create',
     'btn_login_forum' => 'OK',
+    'btn_edit_forum' => 'Update info',
+    'btn_update_forum' => 'Update',
     'btn_create_thread' => 'Create',
     'btn_edit_thread' => 'Update info',
     'btn_update_thread' => 'Update',

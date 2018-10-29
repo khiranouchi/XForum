@@ -86,12 +86,17 @@ class ForumController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
+     * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\Forum  $forum
      * @return \Illuminate\Http\Response
      */
-    public function edit(Forum $forum)
+    public function edit(Request $request, Forum $forum)
     {
-        //
+        return view('forms.forum_form', [
+            'forum' => $forum,
+            'user' => $request->user(),
+            'method' => 'PATCH'
+        ]);
     }
 
     /**

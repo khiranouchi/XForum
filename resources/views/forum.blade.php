@@ -14,7 +14,7 @@
     <div class="x-part row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-body">
+                <div id="x_forum_info" class="card-body">
                     <dl class="row">
                         <dt class="col-sm-3">{{ __('labels.forum_title') }}</dt>
                         <dd class="col-sm-9">{{ $forum->title }}</dd>
@@ -28,6 +28,13 @@
                         <dt class="col-sm-3">{{ __('labels.forum_creator_user_name') }}</dt>
                         <dd class="col-sm-9">{{ $forum->creator_user->name }}</dd>
                         @endif
+
+                        <dd class="col-sm-12">
+                            <button class="btn btn-outline-secondary x-btn-small-padding"
+                                    onclick="SwitchToEditMode('x_forum_info', '{{ route('forums.edit', ['forum' => $forum->id]) }}')">
+                                {{ __('labels.btn_edit_forum') }}
+                            </button>
+                        </dd>
                     </dl>
 
                     <!-- TODO button to edit info -->
