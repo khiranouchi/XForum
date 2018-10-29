@@ -12,8 +12,9 @@ class CommentController extends Controller
 {
     public function __construct()
     {
+        $this->middleware('verify.current.forum');
         $this->middleware('auth.forum');
-        $this->middleware('verify.forum');
+        $this->middleware('verify.forum.inclusion');
     }
 
     /**
@@ -44,11 +45,6 @@ class CommentController extends Controller
      */
     public function store(Request $request, Forum $forum, Thread $thread)
     {
-        // verify forum_id with one in session
-        if ($forum->id !== session('forum_id')) {
-            return abort(419);
-        }
-
         $comment = new Comment;
 
         $comment->thread_id = $thread->id;
@@ -108,11 +104,6 @@ class CommentController extends Controller
      */
     public function destroy(Request $request, Forum $forum, Thread $thread, Comment $comment)
     {
-        // verify forum_id with one in session
-        if ($forum->id !== session('forum_id')) {
-            return abort(419);
-        }
-
         // verify user_id
         if (!$request->user() or !$comment->creator_user_id or $request->user()->id !== $comment->creator_user_id) {
             return abort(419);

@@ -13,8 +13,9 @@ class ReplyController extends Controller
 {
     public function __construct()
     {
+        $this->middleware('verify.current.forum');
         $this->middleware('auth.forum');
-        $this->middleware('verify.forum');
+        $this->middleware('verify.forum.inclusion');
     }
 
     /**
@@ -45,11 +46,6 @@ class ReplyController extends Controller
      */
     public function store(Request $request, Forum $forum, Thread $thread, Comment $comment)
     {
-        // verify forum_id with one in session
-        if ($forum->id !== session('forum_id')) {
-            return abort(419);
-        }
-
         $reply = new Reply;
 
         $reply->comment_id = $comment->id;
@@ -108,11 +104,6 @@ class ReplyController extends Controller
      */
     public function destroy(Request $request, Forum $forum, Thread $thread, Comment $comment, Reply $reply)
     {
-        // verify forum_id with one in session
-        if ($forum->id !== session('forum_id')) {
-            return abort(419);
-        }
-
         // verify user_id
         if (!$request->user() or !$reply->creator_user_id or $request->user()->id !== $reply->creator_user_id) {
             return abort(419);

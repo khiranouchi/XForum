@@ -13,8 +13,9 @@ class ThreadController extends Controller
 {
     public function __construct()
     {
+        $this->middleware('verify.current.forum')->except('show');
         $this->middleware('auth.forum');
-        $this->middleware('verify.forum')->except('store');;
+        $this->middleware('verify.forum.inclusion')->except('store');;
     }
 
     /**
@@ -47,10 +48,6 @@ class ThreadController extends Controller
     {
         $thread = new Thread;
 
-        // verify forum_id with one in session
-        if ($forum->id !== session('forum_id')) {
-            return abort(419);
-        }
         $thread->forum_id = $forum->id;
 
         $thread->title = $request->title;

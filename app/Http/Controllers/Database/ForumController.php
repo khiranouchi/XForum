@@ -12,6 +12,7 @@ class ForumController extends Controller
 {
     public function __construct()
     {
+        $this->middleware('verify.current.forum')->except(['store', 'show']);
         $this->middleware('auth.forum')->except('store');
     }
 
