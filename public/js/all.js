@@ -13,3 +13,13 @@ function ShowHideBlock(switchObj, targetId) {
         $(switchObj).html('&#x25bc;');
     }
 }
+
+/**
+ * Show check dialog.
+ * Prevent default if not confirmed.
+ */
+function ShowCheckDialog(message="Do you really submit?") {
+    if (!confirm(message)) {
+        event.preventDefault();
+    }
+}

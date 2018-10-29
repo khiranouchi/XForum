@@ -90,7 +90,7 @@
                                         <!-- edit comment -->
                                         <a class="dropdown-item" href="#">{{ __('labels.dropdown_edit') }}</a>
                                         <!-- delete comment -->
-                                        <form method="post" name="z_form_comment_destroy_{{ $comment->id }}"
+                                        <form method="post" name="z_form_comment_destroy_{{ $comment->id }}" class="z_check_dialog"
                                               action="{{ route('comments.destroy', ['forum' => $forum->id, 'thread' => $thread->id, 'comment' => $comment->id]) }}">
                                             @csrf
                                             <input name="_method" type="hidden" value="DELETE">
@@ -144,7 +144,7 @@
                                                 <!-- edit reply -->
                                                 <a class="dropdown-item" href="#">{{ __('labels.dropdown_edit') }}</a>
                                                 <!-- delete reply -->
-                                                <form method="post" name="z_form_reply_destroy_{{ $reply->id }}"
+                                                <form method="post" name="z_form_reply_destroy_{{ $reply->id }}" class="z_check_dialog"
                                                       action="{{ route('replies.destroy', ['forum' => $forum->id, 'thread' => $thread->id, 'comment' => $comment->id, 'reply' => $reply->id]) }}">
                                                     @csrf
                                                     <input name="_method" type="hidden" value="DELETE">
@@ -272,6 +272,11 @@ $(document).ready(function(){
 $('form').on('click', function(){
     var tmp = $(window).scrollTop();
     $(this).append('<input name="scroll" type="hidden" value="' + tmp + '">');
+});
+
+//delete forms show check dialog before submit (must be the last listener of onclick)
+$('form.z_check_dialog').on('click', function(){
+    return ShowCheckDialog("Do you really delete this?");
 });
 </script>
 @endsection
