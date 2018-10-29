@@ -36,6 +36,22 @@
 
 
 /*************************************************
+ ** bootstrap form *******************************
+ *************************************************/
+
+.form-group:last-child {
+	margin-bottom: 0;
+}
+
+@media (max-width: 991px) {
+	.col-form-label {
+		padding-top: 0;
+		padding-bottom: 0.2rem;
+	}
+}
+
+
+/*************************************************
  ** bootstrap list-group *************************
  *************************************************/
 
@@ -66,4 +82,10 @@
 
 .x-hover-pointer:hover {
 	cursor: pointer;
+}
+
+.x-btn-small-padding {
+	font-size: 95%;
+    padding-top: 0.05rem;
+    padding-bottom: 0rem;
 }
