@@ -6,6 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Thread extends Model
 {
+    public function getAllColumnNames()
+    {
+        return ['title', 'description', 'creator_name'];
+    }
+
     /**
      * Subordinate relation.
      *

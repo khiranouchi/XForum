@@ -127,7 +127,17 @@ class ThreadController extends Controller
      */
     public function update(Request $request, Forum $forum, Thread $thread)
     {
-        // TODO
+        if ($request->isMethod('PATCH')) {
+            foreach ($thread->getAllColumnNames() as $field) {
+                if ($request->filled($field)) {
+                    $thread->$field = $request->$field;
+                }
+            }
+            $thread->save();
+            return redirect()->route('threads.show', ['forum' => $forum, 'thread' => $thread]);
+        }else{
+            return abort(501);
+        }
     }
 
     /**
