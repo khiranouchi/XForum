@@ -100,8 +100,17 @@ class CommentController extends Controller
      */
     public function update(Request $request, Forum $forum, Thread $thread, Comment $comment)
     {
-        // TODO
-        return redirect(route('threads.show', ['forum' => $forum, 'thread' => $thread])."?scroll=".$request->scroll);
+        if ($request->isMethod('PATCH')) {
+            foreach ($comment->getAllColumnNames() as $field) {
+                if ($request->filled($field)) {
+                    $comment->$field = $request->$field;
+                }
+            }
+            $comment->save();
+            return redirect(route('threads.show', ['forum' => $forum, 'thread' => $thread])."?scroll=".$request->scroll);
+        }else{
+            return abort(501);
+        }
     }
 
     /**

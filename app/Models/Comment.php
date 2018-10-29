@@ -6,6 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Comment extends Model
 {
+    public function getAllColumnNames()
+    {
+        return ['title', 'content', 'creator_name'];
+    }
+
     /**
      * Subordinate relation.
      *
