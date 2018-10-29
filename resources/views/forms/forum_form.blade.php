@@ -39,16 +39,20 @@
         </div>
     </div>
 
-    @if ($method !== 'PATCH')
-    @if ($user)
     <!-- password -->
-    <div class="form-group row">
-        <label for="password" class="col-lg-4 col-form-label text-lg-right">{{ __('labels.form_forum_password') }}</label>
-        <div class="col-lg-6">
-            <input type="password" name="password" id="password" class="form-control" value="{{ old('password') }}" autofocus>
+    @if ($user)
+        @if ($method !== 'PATCH' or $forum->creator_user_id === $user->id)
+        <div class="form-group row">
+            <label for="password" class="col-lg-4 col-form-label text-lg-right">{{ __('labels.form_forum_password') }}</label>
+            <div class="col-lg-6">
+                <input type="password" name="password" id="password" class="form-control" autofocus
+                @if ($method !== 'PATCH')
+                value="{{ old('password') }}"
+                @endif
+                >
+            </div>
         </div>
-    </div>
-    @endif
+        @endif
     @endif
 
     <div class="form-group row">

@@ -108,7 +108,25 @@ class ForumController extends Controller
      */
     public function update(Request $request, Forum $forum)
     {
-        //
+        if ($request->isMethod('PATCH')) {
+            foreach ($forum->getAllColumnNames() as $field) {
+                if ($request->filled($field)) {
+                    if ($field === 'password') {
+                        // verify (only logined creator can change password)
+                        if ($forum->creator_user_id !== $request->user()->id) {
+                            return abort(419);
+                        }
+                        $forum->password = Hash::make($request->password);
+                    } else {
+                        $forum->$field = $request->$field;
+                    }
+                }
+            }
+            $forum->save();
+            return redirect()->route('forums.show', ['forum' => $forum]);
+        }else{
+            return abort(501);
+        }
     }
 
     /**

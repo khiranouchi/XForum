@@ -27,6 +27,11 @@ class Forum extends Authenticatable
         'password',
     ];
 
+    public function getAllColumnNames()
+    {
+        return ['title', 'description', 'creator_name', 'password'];
+    }
+
     /**
      * Subordinate relation.
      *
