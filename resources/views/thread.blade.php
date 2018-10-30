@@ -45,7 +45,7 @@
                                 {{ __('labels.btn_edit_thread') }}
                             </button>
                             <!-- delete thread -->
-                            @if ($thread->creator_user and $user and $user->id === $thread->creator_user_id)
+                            @if (($user and $thread->creator_user and $user->id === $thread->creator_user_id) or ($guest_id and $guest_id === $thread->creator_guest_id))
                             <form class="x-inline-form"
                                   action="{{ route('threads.destroy', ['forum' => $forum, 'thread' => $thread]) }}" method="post"
                                   onclick="ShowCheckDialog('{{ __('texts.dialog_delete_thread_1') }}', '{{ __('texts.dialog_delete_thread_2') }}');">
