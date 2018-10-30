@@ -22,15 +22,12 @@ class SaveCookieGuestId
     {
         $response = $next($request);
 
+        // if not logined
         if (!$request->user()) {
-            $guest_id = $request->cookie(config('const.COOKIE_GUEST_ID_KEY'));
-
-            // if cookie 'guest_id' does not exist in the client request
-            if (!$guest_id) {
-                // set cookie
-                $uuid = Uuid::generate()->string;
-                $response->cookie(config('const.COOKIE_GUEST_ID_KEY'), $uuid);
-            }
+            // set cookie everytime
+            $uuid = Uuid::generate()->string;
+            $minutes = 60 * 24 * 365 * 10; // 10 years
+            $response->cookie(config('const.COOKIE_GUEST_ID_KEY'), $uuid, $minutes);
         }
 
         return $response;
