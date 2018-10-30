@@ -98,38 +98,44 @@
                             </div>
 
                             <div class="col-5 dropdown">
-                                @if ($comment->creator_user)
-                                    @if ($user and $user->id === $comment->creator_user->id)
-                                    <div class="dropdown-toggle text-right x-text-ellipsis" id="z_dropdown_{{ $comment->id }}"
-                                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        {{ $comment->creator_user->name }}
-                                    </div>
-                                    <div class="dropdown-menu" aria-labelledby="z_dropdown_{{ $comment->id }}">
-                                        <!-- edit comment -->
-                                        <div class="dropdown-item"
-                                             onclick="SwitchToEditMode('x_comment_content_{{ $comment->id }}', '{{ route('comments.edit', ['forum' => $forum->id, 'thread' => $thread->id, 'comment' => $comment->id]) }}')">
-                                            {{ __('labels.dropdown_edit') }}
-                                        </div>
-                                        <!-- delete comment -->
-                                        <form method="post" name="z_form_comment_destroy_{{ $comment->id }}" class="z_check_dialog"
-                                              action="{{ route('comments.destroy', ['forum' => $forum->id, 'thread' => $thread->id, 'comment' => $comment->id]) }}"
-                                              onclick="SaveScroll(this);ShowCheckDialog('{{ __('texts.dialog_delete_comment') }}');">
-                                            @csrf
-                                            <input name="_method" type="hidden" value="DELETE">
-                                            <a class="dropdown-item"
-                                               href="javascript:document.z_form_comment_destroy_{{ $comment->id }}.submit();">
-                                                {{ __('labels.dropdown_delete') }}
-                                            </a>
-                                        </form>
-                                    </div>
-                                    @else
-                                    <div class="text-right x-text-ellipsis">
-                                        {{ $comment->creator_user->name }}
-                                    </div>
-                                    @endif
-                                @elseif (!is_null($comment->creator_name) and $comment->creator_name !== "")
-                                <div class="text-right x-text-ellipsis">
+                                @if (($user and $comment->creator_user and $user->id === $comment->creator_user->id) or ($guest_id and $guest_id === $comment->creator_guest_id))
+                                <div class="dropdown-toggle text-right x-text-ellipsis" id="z_dropdown_{{ $comment->id }}"
+                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    @if ($comment->creator_user)
+                                    {{ $comment->creator_user->name }}
+                                    @elseif (!is_null($comment->creator_name) and $comment->creator_name !== "")
                                     {{ $comment->creator_name }}
+                                    @else
+                                    {{ __('labels.text_no_name') }}
+                                    @endif
+                                </div>
+                                <div class="dropdown-menu" aria-labelledby="z_dropdown_{{ $comment->id }}">
+                                    <!-- edit comment -->
+                                    <div class="dropdown-item"
+                                         onclick="SwitchToEditMode('x_comment_content_{{ $comment->id }}', '{{ route('comments.edit', ['forum' => $forum->id, 'thread' => $thread->id, 'comment' => $comment->id]) }}')">
+                                        {{ __('labels.dropdown_edit') }}
+                                    </div>
+                                    <!-- delete comment -->
+                                    <form method="post" name="z_form_comment_destroy_{{ $comment->id }}" class="z_check_dialog"
+                                          action="{{ route('comments.destroy', ['forum' => $forum->id, 'thread' => $thread->id, 'comment' => $comment->id]) }}"
+                                          onclick="SaveScroll(this);ShowCheckDialog('{{ __('texts.dialog_delete_comment') }}');">
+                                        @csrf
+                                        <input name="_method" type="hidden" value="DELETE">
+                                        <a class="dropdown-item"
+                                           href="javascript:document.z_form_comment_destroy_{{ $comment->id }}.submit();">
+                                            {{ __('labels.dropdown_delete') }}
+                                        </a>
+                                    </form>
+                                </div>
+                                @else
+                                <div class="text-right x-text-ellipsis">
+                                    @if ($comment->creator_user)
+                                    {{ $comment->creator_user->name }}
+                                    @elseif (!is_null($comment->creator_name) and $comment->creator_name !== "")
+                                    {{ $comment->creator_name }}
+                                    @else
+                                    {{ __('labels.text_no_name') }}
+                                    @endif
                                 </div>
                                 @endif
                             </div>
