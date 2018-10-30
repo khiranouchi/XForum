@@ -2,7 +2,7 @@ XForum
 ============
 Website: COMING SOON <br>
 You can create simple public/private forum page. <br>
-Participants don't need any sign up or log in. Even forum creator can skip sign up.
+You don't need to create account to create forums, threads, comments and replies (You also can create accounts to keep what you create instead of by using cookie).
 
 Requirements
 --------
@@ -33,3 +33,10 @@ Install and Run
 Usage
 --------
 TODO
+
+Dependency
+--------
++ Autosize
+  - Copyright (c) 2015 Jack Moore
+  - Released under the MIT license
+  - https://github.com/jackmoore/autosize/blob/master/LICENSE.md
