@@ -17,6 +17,7 @@ class ReplyController extends Controller
         $this->middleware('auth.forum');
         $this->middleware('verify.forum.inclusion');
         $this->middleware('verify.creator:reply')->except('store'); // user check for edit/update/delete
+        $this->middleware('save.cookie.guest');
     }
 
     /**

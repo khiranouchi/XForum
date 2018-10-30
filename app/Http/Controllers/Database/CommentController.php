@@ -16,6 +16,7 @@ class CommentController extends Controller
         $this->middleware('auth.forum');
         $this->middleware('verify.forum.inclusion');
         $this->middleware('verify.creator:comment')->except('store'); // user check for edit/update/delete
+        $this->middleware('save.cookie.guest');
     }
 
     /**

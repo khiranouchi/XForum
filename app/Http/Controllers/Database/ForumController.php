@@ -14,6 +14,7 @@ class ForumController extends Controller
     {
         $this->middleware('verify.current.forum')->except(['store', 'show']);
         $this->middleware('auth.forum')->except('store');
+        $this->middleware('save.cookie.guest');
     }
 
     /**

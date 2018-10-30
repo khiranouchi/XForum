@@ -19,6 +19,7 @@ class CreateCommentsTable extends Migration
             $table->string('title')->nullable();
             $table->text('content');
             $table->unsignedInteger('creator_user_id')->nullable();
+            $table->uuid('creator_guest_id')->nullable();
             $table->string('creator_name')->nullable();
             $table->timestamps();
             $table->foreign('thread_id')->references('id')->on('threads')->onDelete('cascade');

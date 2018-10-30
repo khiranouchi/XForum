@@ -17,6 +17,7 @@ class ThreadController extends Controller
         $this->middleware('auth.forum');
         $this->middleware('verify.forum.inclusion')->except('store');;
         $this->middleware('verify.creator:thread')->except(['store', 'show', 'edit', 'update']); // user check for delete
+        $this->middleware('save.cookie.guest');
     }
 
     /**
