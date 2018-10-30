@@ -14,6 +14,7 @@ class ForumController extends Controller
     {
         $this->middleware('verify.current.forum')->except(['store', 'show']);
         $this->middleware('auth.forum')->except('store');
+        $this->middleware('verify.creator:forum')->except(['store', 'show', 'edit', 'update']); // user check for delete
         $this->middleware('save.cookie.guest');
     }
 
@@ -82,7 +83,8 @@ class ForumController extends Controller
         return view('forum', [
             'forum' => $forum,
             'threads' => $threads,
-            'user' => $request->user()
+            'user' => $request->user(),
+            'guest_id' => $request->cookie(config('const.COOKIE_GUEST_ID_KEY'))
         ]);
     }
 
@@ -140,6 +142,7 @@ class ForumController extends Controller
      */
     public function destroy(Forum $forum)
     {
-        //
+        $forum->delete();
+        return redirect()->route('top');
     }
 }

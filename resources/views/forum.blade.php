@@ -30,10 +30,23 @@
                         @endif
 
                         <dd class="col-sm-12">
-                            <button class="btn btn-outline-secondary x-btn-small-padding"
+                            <!-- edit forum -->
+                            <button class="btn btn-outline-secondary x-btn-small-padding x-inline-form"
                                     onclick="SwitchToEditMode('x_forum_info', '{{ route('forums.edit', ['forum' => $forum->id]) }}')">
                                 {{ __('labels.btn_edit_forum') }}
                             </button>
+                            <!-- delete forum -->
+                            @if (($user and $forum->creator_user and $user->id === $forum->creator_user_id) or ($guest_id and $guest_id === $forum->creator_guest_id))
+                            <form class="x-inline-form"
+                                  action="{{ route('forums.destroy', ['forum' => $forum]) }}" method="post"
+                                  onclick="ShowCheckDialog('{{ __('texts.dialog_delete_forum_1') }}', '{{ __('texts.dialog_delete_forum_2') }}');">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-outline-secondary x-btn-small-padding">
+                                    {{ __('labels.btn_delete_forum') }}
+                                </button>
+                            </form>
+                            @endif
                         </dd>
                     </dl>
 
