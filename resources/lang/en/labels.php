@@ -60,5 +60,6 @@ return [
      */
     'text_no_description' => '(no description)',
     'text_no_title' => '(no title)',
+    'text_no_name' => '(no name)',
     'text_edited' => '(edited)',
 ];

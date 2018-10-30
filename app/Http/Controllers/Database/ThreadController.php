@@ -100,6 +100,7 @@ class ThreadController extends Controller
             'comments' => $comments,
             'dict_replies' => $dict_replies,
             'user' => $request->user(),
+            'guest_id' => $request->cookie(config('const.COOKIE_GUEST_ID_KEY')),
             'scroll' => $scroll
         ]);
     }

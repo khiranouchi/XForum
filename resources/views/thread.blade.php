@@ -156,38 +156,44 @@
                                     </div>
 
                                     <div class="col-5 dropdown">
-                                        @if ($reply->creator_user)
-                                            @if ($user and $user->id === $reply->creator_user->id)
-                                            <div class="dropdown-toggle text-right x-text-ellipsis" id="z_dropdown_{{ $reply->id }}"
-                                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                {{ $reply->creator_user->name }}
-                                            </div>
-                                            <div class="dropdown-menu" aria-labelledby="z_dropdown_{{ $reply->id }}">
-                                                <!-- edit reply -->
-                                                <div class="dropdown-item"
-                                                     onclick="SwitchToEditMode('x_reply_content_{{ $reply->id }}', '{{ route('replies.edit', ['forum' => $forum->id, 'thread' => $thread->id, 'comment' => $comment->id, 'reply' => $reply->id]) }}')">
-                                                    {{ __('labels.dropdown_edit') }}
-                                                </div>
-                                                <!-- delete reply -->
-                                                <form method="post" name="z_form_reply_destroy_{{ $reply->id }}" class="z_check_dialog"
-                                                      action="{{ route('replies.destroy', ['forum' => $forum->id, 'thread' => $thread->id, 'comment' => $comment->id, 'reply' => $reply->id]) }}"
-                                                      onclick="SaveScroll(this);ShowCheckDialog('{{ __('texts.dialog_delete_reply') }}');">
-                                                    @csrf
-                                                    <input name="_method" type="hidden" value="DELETE">
-                                                    <a class="dropdown-item"
-                                                       href="javascript:document.z_form_reply_destroy_{{ $reply->id }}.submit();">
-                                                        {{ __('labels.dropdown_delete') }}
-                                                    </a>
-                                                </form>
-                                            </div>
-                                            @else
-                                            <div class="text-right x-text-ellipsis">
-                                                {{ $reply->creator_user->name }}
-                                            </div>
-                                            @endif
-                                        @elseif (!is_null($reply->creator_name) and $reply->creator_name !== "")
-                                        <div class="text-right x-text-ellipsis">
+                                        @if (($user and $reply->creator_user and $user->id === $reply->creator_user->id) or ($guest_id and $guest_id === $reply->creator_guest_id))
+                                        <div class="dropdown-toggle text-right x-text-ellipsis" id="z_dropdown_{{ $reply->id }}"
+                                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            @if ($reply->creator_user)
+                                            {{ $reply->creator_user->name }}
+                                            @elseif (!is_null($reply->creator_name) and $reply->creator_name !== "")
                                             {{ $reply->creator_name }}
+                                            @else
+                                            {{ __('labels.text_no_name') }}
+                                            @endif
+                                        </div>
+                                        <div class="dropdown-menu" aria-labelledby="z_dropdown_{{ $reply->id }}">
+                                            <!-- edit reply -->
+                                            <div class="dropdown-item"
+                                                 onclick="SwitchToEditMode('x_reply_content_{{ $reply->id }}', '{{ route('replies.edit', ['forum' => $forum->id, 'thread' => $thread->id, 'comment' => $comment->id, 'reply' => $reply->id]) }}')">
+                                                {{ __('labels.dropdown_edit') }}
+                                            </div>
+                                            <!-- delete reply -->
+                                            <form method="post" name="z_form_reply_destroy_{{ $reply->id }}" class="z_check_dialog"
+                                                  action="{{ route('replies.destroy', ['forum' => $forum->id, 'thread' => $thread->id, 'comment' => $comment->id, 'reply' => $reply->id]) }}"
+                                                  onclick="SaveScroll(this);ShowCheckDialog('{{ __('texts.dialog_delete_reply') }}');">
+                                                @csrf
+                                                <input name="_method" type="hidden" value="DELETE">
+                                                <a class="dropdown-item"
+                                                   href="javascript:document.z_form_reply_destroy_{{ $reply->id }}.submit();">
+                                                    {{ __('labels.dropdown_delete') }}
+                                                </a>
+                                            </form>
+                                        </div>
+                                        @else
+                                        <div class="text-right x-text-ellipsis">
+                                            @if ($reply->creator_user)
+                                            {{ $reply->creator_user->name }}
+                                            @elseif (!is_null($reply->creator_name) and $reply->creator_name !== "")
+                                            {{ $reply->creator_name }}
+                                            @else
+                                            {{ __('labels.text_no_name') }}
+                                            @endif
                                         </div>
                                         @endif
                                     </div>
