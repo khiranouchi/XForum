@@ -1,0 +1,48 @@
+/*************************************************
+ ** bootstrap card (override) ********************
+ *************************************************/
+
+.card-header {
+    padding: 0.5rem;
+    padding-top: 0.3rem;
+    padding-bottom: 0.3rem;
+}
+.card-body {
+    padding: 0.5rem;
+}
+.card-footer {
+    padding: 0.5rem;
+    padding-top: 0.2rem;
+    padding-bottom: 0.2rem;
+    font-size: small;
+}
+
+.card .x-font-small {
+	padding-top: 0.1rem;
+	font-size: small;
+}
+
+
+/*************************************************
+ ** bootstrap form (override) ********************
+ *************************************************/
+
+.form-group {
+	margin-bottom: 0.5rem;
+}
+.form-group:last-child {
+	margin-bottom: 0;
+}
+
+
+/*************************************************
+ ** bootstrap dropdown (override) ****************
+ *************************************************/
+
+.dropdown-toggle:after {
+	content: none;
+}
+
+.dropdown-toggle:hover {
+	cursor: pointer;
+}
