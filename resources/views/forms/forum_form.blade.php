@@ -39,20 +39,42 @@
         </div>
     </div>
 
-    <!-- password -->
     @if ($user)
+    <div class="form-group row">
+        <!-- password -->
         @if ($method !== 'PATCH' or $forum->creator_user_id === $user->id)
-        <div class="form-group row">
-            <label for="password" class="col-lg-4 col-form-label text-lg-right">{{ __('labels.form_forum_password') }}</label>
-            <div class="col-lg-6">
-                <input type="password" name="password" id="password" class="form-control" autofocus
-                @if ($method !== 'PATCH')
-                value="{{ old('password') }}"
-                @endif
-                >
-            </div>
+        <label for="password" class="col-lg-4 col-form-label text-lg-right">{{ __('labels.form_forum_password') }}</label>
+        <div class="col-lg-6">
+            <input type="password" name="password" id="password" class="form-control" autofocus
+            @if ($method !== 'PATCH')
+            value="{{ old('password') }}"
+            @endif
+            >
         </div>
         @endif
+
+        <!-- delete password checkbox -->
+        @if ($method === 'PATCH' and $forum->password)
+        <div class="col-lg-6 offset-lg-4">
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" name="password_delete" id="password_delete"
+                       onchange="SwitchPasswordDelete(this)">
+                <label class="form-check-label" for="password_delete">
+                    {{ __('labels.form_forum_delete_password') }}
+                </label>
+            </div>
+        </div>
+        <script>
+        function SwitchPasswordDelete(obj) {
+            if (obj.checked) {
+                $('#password').attr('disabled', 'disabled');
+            } else {
+                $('#password').removeAttr('disabled');
+            }
+        }
+        </script>
+        @endif
+    </div>
     @endif
 
     <div class="form-group row">

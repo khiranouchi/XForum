@@ -127,7 +127,13 @@ class ForumController extends Controller
                     }
                 }
             }
+
+            if ($request->filled('password_delete')) {
+                $forum->password = null;
+            }
+
             $forum->save();
+
             return redirect()->route('forums.show', ['forum' => $forum]);
         }else{
             return abort(501);

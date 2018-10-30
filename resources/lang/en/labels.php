@@ -29,6 +29,7 @@ return [
     'form_forum_title' => 'Name',
     'form_forum_description' => 'Description (optional)',
     'form_forum_password' => 'Password (optional)',
+    'form_forum_delete_password' => 'Delete password',
     'form_forum_login_password' => 'Password',
     'form_thread_title' => 'Name',
     'form_thread_description' => 'Description (optional)',
