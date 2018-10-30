@@ -55,6 +55,7 @@ class CommentController extends Controller
         if($request->user()) {
             $comment->creator_user_id = $request->user()->id;
         } else {
+            $comment->creator_guest_id = $request->cookie(config('const.COOKIE_GUEST_ID_KEY'));
             $comment->creator_name = $request->creator_name;
         }
 

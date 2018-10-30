@@ -49,11 +49,13 @@ class ForumController extends Controller
 
         $forum->title = $request->title;
         $forum->description = $request->description;
-        if($request->filled('password')) {
-            $forum->password = Hash::make($request->password);
-        }
         if($request->user()) {
             $forum->creator_user_id = $request->user()->id;
+            if($request->filled('password')) {
+                $forum->password = Hash::make($request->password);
+            }
+        } else {
+            $forum->creator_guest_id = $request->cookie(config('const.COOKIE_GUEST_ID_KEY'));
         }
 
         $forum->save();

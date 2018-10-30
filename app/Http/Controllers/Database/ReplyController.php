@@ -55,6 +55,7 @@ class ReplyController extends Controller
         if($request->user()) {
             $reply->creator_user_id = $request->user()->id;
         } else {
+            $reply->creator_guest_id = $request->cookie(config('const.COOKIE_GUEST_ID_KEY'));
             $reply->creator_name = $request->creator_name;
         }
 
