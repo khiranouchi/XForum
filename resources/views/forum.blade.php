@@ -21,7 +21,9 @@
 
                         @if ($forum->description)
                         <dt class="col-sm-3">{{ __('labels.forum_description') }}</dt>
-                        <dd class="col-sm-9">{{ $forum->description }}</dd>
+                        <dd class="col-sm-9 x-markdown-compact">
+                            @markdown($forum->description)
+                        </dd>
                         @endif
 
                         @if ($forum->creator_user)
