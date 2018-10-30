@@ -27,7 +27,9 @@
 
                         @if ($thread->description)
                         <dt class="col-sm-3">{{ __('labels.thread_description') }}</dt>
-                        <dd class="col-sm-9">{{ $thread->description }}</dd>
+                        <dd class="col-sm-9 x-markdown-compact">
+                            @markdown($thread->description)
+                        </dd>
                         @endif
 
                         @if ($thread->creator_user)
@@ -84,8 +86,8 @@
                         </div>
                     </div>
 
-                    <div id="x_comment_content_{{ $comment->id }}" class="card-body">
-                        {!! nl2br(e($comment->content)) !!}
+                    <div id="x_comment_content_{{ $comment->id }}" class="card-body x-markdown-compact">
+                        @markdown($comment->content)
                     </div>
 
                     <div class="card-footer">
@@ -148,8 +150,8 @@
                 <div class="row">
                     <div class="col-11 offset-1">
                         <div class="card">
-                            <div id="x_reply_content_{{ $reply->id }}" class="card-body">
-                                {!! nl2br(e($reply->content)) !!}
+                            <div id="x_reply_content_{{ $reply->id }}" class="card-body x-markdown-compact">
+                                @markdown($reply->content)
                             </div>
 
                             <div class="card-footer">
