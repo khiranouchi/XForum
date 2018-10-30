@@ -21,16 +21,21 @@ class VerifyCreator
     {
         $obj = $request->route()->parameter($target_parameter);
 
-        /*
-         * current check
-         *  "current user" must be logined user
-         *  "creator user" must be logined user
-         *  "current user" === "creator user"
-         */ 
-        if (!$request->user() or !$obj->creator_user_id or $request->user()->id !== $obj->creator_user_id) {
-            return abort(419);
+        // when current user is logined
+        if ($request->user()) {
+            // if (creator exists) and (current user is creator)
+            if ($obj->creator_user_id === $request->user()->id) {
+                return $next($request);
+            }
+        }
+        // when guest (including when current user is logined)
+        if ($request->cookie(config('const.COOKIE_GUEST_ID_KEY'))) {
+            // if "creator guest exists" and "current guest is creator"
+            if ($obj->creator_guest_id === $request->cookie(config('const.COOKIE_GUEST_ID_KEY'))) {
+                return $next($request);
+            }
         }
 
-        return $next($request);
+        return abort(419);
     }
 }

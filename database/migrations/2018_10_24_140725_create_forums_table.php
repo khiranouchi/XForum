@@ -18,6 +18,7 @@ class CreateForumsTable extends Migration
             $table->string('title');
             $table->text('description')->nullable();
             $table->unsignedInteger('creator_user_id')->nullable();
+            $table->uuid('creator_guest_id')->nullable();
             $table->string('password')->nullable();
             $table->timestamps();
             $table->foreign('creator_user_id')->references('id')->on('users')->onDelete('set null');

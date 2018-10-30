@@ -17,6 +17,7 @@ class ThreadController extends Controller
         $this->middleware('auth.forum');
         $this->middleware('verify.forum.inclusion')->except('store');;
         $this->middleware('verify.creator:thread')->except(['store', 'show', 'edit', 'update']); // user check for delete
+        $this->middleware('save.cookie.guest');
     }
 
     /**
@@ -56,6 +57,7 @@ class ThreadController extends Controller
         if($request->user()) {
             $thread->creator_user_id = $request->user()->id;
         } else {
+            $thread->creator_guest_id = $request->cookie(config('const.COOKIE_GUEST_ID_KEY'));
             $thread->creator_name = $request->creator_name;
         }
 
@@ -98,6 +100,7 @@ class ThreadController extends Controller
             'comments' => $comments,
             'dict_replies' => $dict_replies,
             'user' => $request->user(),
+            'guest_id' => $request->cookie(config('const.COOKIE_GUEST_ID_KEY')),
             'scroll' => $scroll
         ]);
     }

@@ -18,6 +18,7 @@ class CreateRepliesTable extends Migration
             $table->unsignedInteger('comment_id');
             $table->text('content');
             $table->unsignedInteger('creator_user_id')->nullable();
+            $table->uuid('creator_guest_id')->nullable();
             $table->string('creator_name')->nullable();
             $table->timestamps();
             $table->foreign('comment_id')->references('id')->on('comments')->onDelete('cascade');

@@ -14,6 +14,8 @@ class ForumController extends Controller
     {
         $this->middleware('verify.current.forum')->except(['store', 'show']);
         $this->middleware('auth.forum')->except('store');
+        $this->middleware('verify.creator:forum')->except(['store', 'show', 'edit', 'update']); // user check for delete
+        $this->middleware('save.cookie.guest');
     }
 
     /**
@@ -48,11 +50,13 @@ class ForumController extends Controller
 
         $forum->title = $request->title;
         $forum->description = $request->description;
-        if($request->filled('password')) {
-            $forum->password = Hash::make($request->password);
-        }
         if($request->user()) {
             $forum->creator_user_id = $request->user()->id;
+            if($request->filled('password')) {
+                $forum->password = Hash::make($request->password);
+            }
+        } else {
+            $forum->creator_guest_id = $request->cookie(config('const.COOKIE_GUEST_ID_KEY'));
         }
 
         $forum->save();
@@ -79,7 +83,8 @@ class ForumController extends Controller
         return view('forum', [
             'forum' => $forum,
             'threads' => $threads,
-            'user' => $request->user()
+            'user' => $request->user(),
+            'guest_id' => $request->cookie(config('const.COOKIE_GUEST_ID_KEY'))
         ]);
     }
 
@@ -122,7 +127,13 @@ class ForumController extends Controller
                     }
                 }
             }
+
+            if ($request->filled('password_delete')) {
+                $forum->password = null;
+            }
+
             $forum->save();
+
             return redirect()->route('forums.show', ['forum' => $forum]);
         }else{
             return abort(501);
@@ -137,6 +148,7 @@ class ForumController extends Controller
      */
     public function destroy(Forum $forum)
     {
-        //
+        $forum->delete();
+        return redirect()->route('top');
     }
 }
