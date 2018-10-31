@@ -24,10 +24,16 @@ class SaveCookieGuestId
 
         // if not logined
         if (!$request->user()) {
-            // set cookie everytime
-            $uuid = Uuid::generate()->string;
+            $guest_id = $request->cookie(config('const.COOKIE_GUEST_ID_KEY'));
             $minutes = 60 * 24 * 365 * 10; // 10 years
-            $response->cookie(config('const.COOKIE_GUEST_ID_KEY'), $uuid, $minutes);
+            if ($guest_id) {
+                // extend cookie lifetime
+                $response->cookie(config('const.COOKIE_GUEST_ID_KEY'), $guest_id, $minutes);
+            } else {
+                // set cookie
+                $uuid = Uuid::generate()->string;
+                $response->cookie(config('const.COOKIE_GUEST_ID_KEY'), $uuid, $minutes);
+            }
         }
 
         return $response;
